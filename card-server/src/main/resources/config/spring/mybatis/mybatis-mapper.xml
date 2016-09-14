@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<mappers>
+		
+		<mapper resource="com/s4game/server/bus/account/entity/mapper/UserAccount.xml"/>
+		<mapper resource="com/s4game/server/bus/account/entity/mapper/RoleAccount.xml"/>
+		<mapper resource="com/s4game/server/bus/role/entity/mapper/UserRole.xml"/>
+		<mapper resource="com/s4game/server/bus/bag/entity/mapper/RoleBagSlot.xml"/>
+		
+		<mapper resource="com/s4game/server/stage/entity/mapper/RoleStage.xml"/>
+		
+		
+		<mapper resource="com/s4game/server/bus/server/entity/mapper/ServerInfo.xml"/>
+		<mapper resource="com/s4game/server/bus/id/entity/mapper/IdGen.xml"/>
+	
+	</mappers>
+	
+</configuration>

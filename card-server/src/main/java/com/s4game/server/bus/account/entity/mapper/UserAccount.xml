@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="USER_ACCOUNT">
+	<resultMap id="userAccount" type="com.s4game.server.bus.account.entity.UserAccount" >
+		<result property="id" column="id"/>
+		<result property="userGuid" column="user_guid"/>
+		<result property="lingshi" column="lingshi"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="serverId" column="server_id"/>
+		<result property="reciveYb" column="recive_yb"/>
+		<result property="isRecharge" column="is_recharge"/>
+		<result property="logUpdateTime" column="log_update_time"/>
+	</resultMap>
+	
+	<sql id="queryConditionUserAccount">
+		<where>
+			<if test="id != null"> AND id = #{id} </if>
+			<if test="userGuid != null"> AND user_guid = #{userGuid} </if>
+			<if test="lingshi != null"> AND lingshi = #{lingshi} </if>
+			<if test="createTime != null"> AND create_time = #{createTime} </if>
+			<if test="updateTime != null"> AND update_time = #{updateTime} </if>						
+			<if test="serverId != null"> AND server_id = #{serverId} </if>
+			<if test="reciveYb != null"> AND recive_yb = #{reciveYb} </if>
+			<if test="isRecharge != null"> AND is_recharge = #{isRecharge} </if>									
+			<if test="logUpdateTime != null"> AND log_update_time = #{logUpdateTime} </if>
+		</where>
+	</sql>
+	
+	<sql id="queryByKeyUserAccount">
+		where id = #{id}
+	</sql>
+	
+	<insert id="insertUserAccount" parameterType="com.s4game.server.bus.account.entity.UserAccount">
+		insert into user_account( id, user_guid, lingshi ,create_time, update_time, server_id, recive_yb, is_recharge, log_update_time )
+		
+		values( #{id}, #{userGuid}, #{lingshi}, #{createTime}, #{updateTime}, #{serverId}, #{reciveYb}, #{isRecharge}, #{logUpdateTime} )
+	</insert>
+	
+	<delete id="deleteUserAccount">
+		delete from user_account
+		<include refid="queryByKeyUserAccount"/>
+	</delete>
+	
+	<update id="updateUserAccount" parameterType="com.s4game.server.bus.account.entity.UserAccount">
+		update user_account set 
+		
+		id = #{id}
+		,user_guid = #{userGuid}
+		,lingshi = #{lingshi}
+		,create_time = #{createTime}
+		,update_time = #{updateTime}
+		,server_id = #{serverId}
+		,recive_yb = #{reciveYb}
+		,is_recharge = #{isRecharge}
+		,log_update_time = #{logUpdateTime}
+
+		<include refid="queryByKeyUserAccount"/>
+	</update>
+	
+	<select id="selectOneUserAccount" resultMap="userAccount">
+		select 
+		id
+		,user_guid
+		,lingshi
+		,create_time
+		,update_time
+		,server_id
+		,recive_yb
+		,is_recharge
+		,log_update_time
+		from user_account 
+		<include refid="queryByKeyUserAccount"/>
+	</select>
+	
+	<select id="selectRecordsCountUserAccount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from user_account
+		<include refid="queryConditionUserAccount"/>
+	</select>
+
+	<select id="selectListUserAccount" parameterType="java.util.Map" resultMap="userAccount">
+		select 
+		id
+		,user_guid
+		,lingshi
+		,create_time
+		,update_time
+		,server_id
+		,recive_yb
+		,is_recharge
+		,log_update_time
+		from user_account
+		<include refid="queryConditionUserAccount"/>
+	</select>
+	
+	<select id="selectAllUserAccount" resultMap="userAccount">
+		select 
+		id
+		,user_guid
+		,lingshi
+		,create_time
+		,update_time
+		,server_id
+		,recive_yb
+		,is_recharge
+		,log_update_time
+		from user_account
+	</select>
+	
+	<select id="selectSingleByParamsUserAccount" resultMap="userAccount">
+		select 
+		id
+		,user_guid
+		,lingshi
+		,create_time
+		,update_time
+		,server_id
+		,recive_yb
+		,is_recharge
+		,log_update_time
+		from user_account 
+		<include refid="queryConditionUserAccount"/>
+	</select>	
+	
+</mapper>

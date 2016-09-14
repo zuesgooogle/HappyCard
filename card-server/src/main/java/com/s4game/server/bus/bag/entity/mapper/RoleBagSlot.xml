@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ROLE_BAG_SLOT">
+
+	<resultMap id="roleBagSlot" type="com.s4game.server.bus.bag.entity.RoleBagSlot" >
+		<result property="id" column="id"/>
+		<result property="slotNum" column="slot_num"/>
+		<result property="userRoleId" column="user_role_id"/>
+		<result property="goodsId" column="goods_id"/>
+		<result property="count" column="count"/>
+		<result property="bind" column="bind"/>
+		<result property="expireTime" column="expire_time"/>
+		<result property="rareLevel" column="rare_level"/>
+		<result property="itemLevel" column="item_level"/>
+		<result property="attributes" column="attributes"/>
+	</resultMap>
+	
+	<sql id="queryConditionRoleBagSlot">
+		<where>
+			<if test="id != null"> AND id = #{id} </if>
+			<if test="slotNum != null"> AND slot_num  = ${slotNum} </if>
+			<if test="userRoleId != null"> AND user_role_id = #{userRoleId} </if>
+			<if test="goodsId != null"> AND goods_id = #{goodsId}</if>
+			<if test="count != null"> AND count = #{count}</if>
+			<if test="bind != null"> AND bind = #{bind}</if>
+			<if test="expireTime != null"> AND expire_time = #{expireTime}</if>
+			<if test="rareLevel != null"> AND rare_level = #{rareLevel}</if>
+			<if test="itemLevel != null"> AND item_level = #{itemLevel}</if>
+		</where>
+	</sql>
+	
+	<sql id="queryByKeyRoleBagSlot">
+		where id = #{id}
+	</sql>
+	
+	<insert id="insertRoleBagSlot" parameterType="com.s4game.server.bus.bag.entity.RoleBagSlot">
+		insert into role_bag_slot(
+			 id 
+			,slot_num 
+			,user_role_id 
+			,goods_id 
+			,count 
+			,bind 
+			,expire_time 
+			,rare_level 
+			,item_level 
+			,attributes 
+		)
+		values(
+			#{id} 
+			,#{slotNum}
+			,#{userRoleId} 
+			,#{goodsId}
+			,#{count}
+			,#{bind}
+			,#{expireTime} 
+			,#{rareLevel}
+			,#{itemLevel} 
+			,#{attributes} 
+		)
+	</insert>
+	
+	<delete id="deleteRoleBagSlot">
+		delete from role_bag_slot
+		<include refid="queryByKeyRoleBagSlot"/>
+	</delete>
+	
+	<update id="updateRoleBagSlot" parameterType="com.s4game.server.bus.bag.entity.RoleBagSlot">
+		update role_bag_slot set
+			 slot_num = #{slotNum}
+			,user_role_id = #{userRoleId}
+			,goods_id = #{goodsId}
+			,count = #{count}
+			,bind = #{bind}
+			,expire_time = #{expireTime}
+			,rare_level = #{rareLevel}
+			,item_level = #{itemLevel}
+			,attributes = #{attributes}
+		<include refid="queryByKeyRoleBagSlot"/>
+	</update>
+	
+	<select id="selectSingleRoleBagSlot" resultMap="roleBagSlot">
+		select 
+		id
+		,slot_num
+		,user_role_id
+		,goods_id
+		,count
+		,bind
+		,expire_time
+		,rare_level
+		,item_level
+		,attributes
+		from role_bag_slot 
+		<include refid="queryByKeyRoleBagSlot"/>
+	</select>
+	
+	<select id="selectRecordsCountRoleBagSlot" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from role_bag_slot
+		<include refid="queryConditionRoleBagSlot"/>
+	</select>
+	
+	<select id="selectMultiPagingRoleBagSlot" parameterType="java.util.Map" resultMap="roleBagSlot">
+		select 
+		id
+		,slot_num
+		,user_role_id
+		,goods_id
+		,count
+		,bind
+		,expire_time
+		,rare_level
+		,item_level
+		,attributes
+		from role_bag_slot
+		<include refid="queryConditionRoleBagSlot"/>
+		limit #start#,#pagesize#
+	</select>
+
+	<select id="selectMultiRoleBagSlot" parameterType="java.util.Map" resultMap="roleBagSlot">
+		select 
+		id
+		,slot_num
+		,user_role_id
+		,goods_id
+		,count
+		,bind
+		,expire_time
+		,rare_level
+		,item_level
+		,attributes
+		from role_bag_slot
+		<include refid="queryConditionRoleBagSlot"/>
+	</select>
+	
+	<select id="selectListRoleBagSlot" resultMap="roleBagSlot">
+		select 
+		id
+		,slot_num
+		,user_role_id
+		,goods_id
+		,count
+		,bind
+		,expire_time
+		,rare_level
+		,item_level
+		,attributes
+		from role_bag_slot
+		<include refid="queryConditionRoleBagSlot"/>
+	</select>
+	
+	<select id="selectOneByParamsRoleBagSlot" resultMap="roleBagSlot">
+		select 
+		id
+		,slot_num
+		,user_role_id
+		,goods_id
+		,count
+		,bind
+		,expire_time
+		,rare_level
+		,item_level
+		,attributes
+		from role_bag_slot 
+		<include refid="queryConditionRoleBagSlot"/>
+	</select>	
+	
+	
+</mapper>
+	
