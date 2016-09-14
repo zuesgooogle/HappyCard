@@ -15,3 +15,5 @@ card-core/.project
 *.prefs
 *.project
 *.log
+
+.DS_Store
