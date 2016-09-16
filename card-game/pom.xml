@@ -7,7 +7,13 @@
   </parent>
   <artifactId>card-game</artifactId>
   
-  <build>
+  <properties>
+        <finalName>game-server</finalName>
+        <appassembler.target>${project.build.directory}/appassembler</appassembler.target>
+        <appassembler.assemble.directory>${appassembler.target}/jsw/${finalName}</appassembler.assemble.directory>
+    </properties>
+
+	<build>
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
@@ -18,6 +24,16 @@
 		</resources>
 
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>appassembler-maven-plugin</artifactId>
@@ -38,7 +54,7 @@
 							<daemons>
 								<daemon>
 									<id>game-server</id>
-									<mainClass>com.simplegame.server.start.ServerStart</mainClass>
+									<mainClass>com.s4game.server.start.ServerStart</mainClass>
 									<generatorConfigurations>
 										<generatorConfiguration>
 											<generator>jsw</generator>
@@ -75,8 +91,10 @@
 										</systemProperties>
 										<extraArguments>
 											<extraArgument>-server</extraArgument>
+											<!-- 
 											<extraArgument>-XX:PermSize=256M</extraArgument>
 											<extraArgument>-XX:MaxPermSize=256M</extraArgument>
+											 -->
 											<extraArgument>-Xloggc:logs/gc.log</extraArgument>
 										</extraArguments>
 									</jvmSettings>

@@ -21,7 +21,7 @@
 	</bean>
 
 	<bean class="com.s4game.core.io.WebsocktListener" init-method="start">
-		<property name="port" value="8001" />
+		<property name="port" value="8080" />
 		<property name="bossThreadSize" value="1" />
 		<property name="workerThreadSize" value="4" />
 		
