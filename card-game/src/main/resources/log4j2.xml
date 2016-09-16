@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status=debug 可以查看log4j的装配过程 -->
+<configuration status="info" monitorInterval="1800">
+	<properties>
+		<property name="LOG_HOME">logs/error</property>
+	</properties>
+
+	<appenders>
+		<Console name="console_appender" target="SYSTEM_OUT">
+			<PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss} [%-5level]-[%thread] [%file:%line] %m%n" />
+		</Console>
+
+		<!-- 错误日志 -->
+		<RollingFile name="error_appender" fileName="${LOG_HOME}/error.log" filePattern="${LOG_HOME}/error-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss} [%-5level]-[%thread] [%file:%line] %m%n" />
+			<SizeBasedTriggeringPolicy size="100 MB" />
+		</RollingFile>
+
+		<!-- 配置日志 -->
+		<RollingFile name="config_appender" fileName="${LOG_HOME}/config-error.log" filePattern="${LOG_HOME}/config-error-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss} [%-5level]-[%thread] [%file:%line] %m%n" />
+			<SizeBasedTriggeringPolicy size="100 MB" />
+		</RollingFile>
+
+		<!-- 服务器状态日志 -->
+		<RollingFile name="server_status_appender" fileName="${LOG_HOME}/server-status.log" filePattern="${LOG_HOME}/server-status-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss} [%-5level]-[%thread] [%file:%line] %m%n" />
+			<SizeBasedTriggeringPolicy size="100 MB" />
+		</RollingFile>
+
+
+	</appenders>
+
+	<loggers>
+		<logger name="org.springframework.core" level="info" />
+		<logger name="org.springframework.beans" level="info" />
+		<logger name="org.springframework.context" level="info" />
+
+		<logger name="error_logger" level="info" additivity="true">
+			<AppenderRef ref="error_appender" />
+		</logger>
+
+		<logger name="config_logger" level="info" additivity="true">
+			<AppenderRef ref="config_appender" />
+		</logger>
+		
+		<logger name="server_status_logger" level="info" additivity="false">
+			<AppenderRef ref="server_status_appender" />
+		</logger>
+		
+
+		<root level="debug">
+			<AppenderRef level="info" ref="error_appender" />
+			<AppenderRef level="info" ref="console_appender" />
+		</root>
+	</loggers>
+
+</configuration>
