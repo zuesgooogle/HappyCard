@@ -8,266 +8,172 @@ import com.s4game.core.data.IEntity;
 
 public class UserRole extends AbsVersion implements Serializable, IEntity {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String id;
-	private String userId;
-	private String name;
-	private String job;
-	private Integer sex;
-	private Long roomCard;
-	private Integer level = Integer.valueOf(1);
-	private String face;
-	private Integer zhenqi = Integer.valueOf(0);
-	private Integer shengwang = Integer.valueOf(0);
-	private Timestamp createTime;
-	private Long onlineTime;
-	private Long offlineTime;
-	private Integer isSetFangchenmi;
-	private Integer chenmiAddOnline;
-	private Integer chenmiAddOffline;
-	private String serverId;
-	private Integer roleType = Integer.valueOf(0);
-	private Long upgradeTime;
-	private String platform;
-	private Integer zhanli;
-	private Integer loginCount;
-	private Long time;
-	private Timestamp logUpdateTime;
+    private String id;
+    private String userId;
+    private String name;
+    private String job;
+    private Integer sex;
+    private Integer card;
+    private String face;
 
-	public Timestamp getLogUpdateTime() {
-		return this.logUpdateTime;
-	}
+    private Timestamp createTime;
+    private Long onlineTime;
+    private Long offlineTime;
+    private String serverId;
+    private Long upgradeTime;
+    private String platform;
+    private Integer loginCount;
+    private Timestamp logUpdateTime;
 
-	public void setLogUpdateTime(Timestamp logUpdateTime) {
-		this.logUpdateTime = logUpdateTime;
-	}
+    public Timestamp getLogUpdateTime() {
+        return this.logUpdateTime;
+    }
 
-	public Integer getZhanli() {
-		return this.zhanli;
-	}
+    public void setLogUpdateTime(Timestamp logUpdateTime) {
+        this.logUpdateTime = logUpdateTime;
+    }
 
-	public void setZhanli(Integer zhanli) {
-		this.zhanli = zhanli;
-	}
+    public Integer getLoginCount() {
+        return this.loginCount;
+    }
 
-	public Integer getLoginCount() {
-		return this.loginCount;
-	}
+    public void setLoginCount(Integer loginCount) {
+        this.loginCount = loginCount;
+    }
 
-	public void setLoginCount(Integer loginCount) {
-		this.loginCount = loginCount;
-	}
+    public Long getOnlineTime() {
+        return this.onlineTime;
+    }
 
-	public Long getTime() {
-		return this.time;
-	}
+    public void setOnlineTime(Long onlineTime) {
+        this.onlineTime = onlineTime;
+    }
 
-	public void setTime(Long time) {
-		this.time = time;
-	}
+    public Long getOfflineTime() {
+        return this.offlineTime;
+    }
 
-	public Long getOnlineTime() {
-		return this.onlineTime;
-	}
+    public void setOfflineTime(Long offlineTime) {
+        this.offlineTime = offlineTime;
+    }
 
-	public void setOnlineTime(Long onlineTime) {
-		this.onlineTime = onlineTime;
-	}
+    public String getId() {
+        return this.id;
+    }
 
-	public Long getOfflineTime() {
-		return this.offlineTime;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setOfflineTime(Long offlineTime) {
-		this.offlineTime = offlineTime;
-	}
+    public String getUserId() {
+        return this.userId;
+    }
 
-	public String getId() {
-		return this.id;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public String getUserId() {
-		return this.userId;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    public String getJob() {
+        return this.job;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public void setJob(String job) {
+        this.job = job;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Integer getSex() {
+        return this.sex;
+    }
 
-	public String getJob() {
-		return this.job;
-	}
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
 
-	public void setJob(String job) {
-		this.job = job;
-	}
+    public String getFace() {
+        return this.face;
+    }
 
-	public Integer getSex() {
-		return this.sex;
-	}
+    public void setFace(String face) {
+        this.face = face;
+    }
 
-	public void setSex(Integer sex) {
-		this.sex = sex;
-	}
+    public Timestamp getCreateTime() {
+        return this.createTime;
+    }
 
-	public Long getRoomCard() {
-		return roomCard;
-	}
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
 
-	public void setRoomCard(Long roomCard) {
-		this.roomCard = roomCard;
-	}
+    public String getServerId() {
+        return this.serverId;
+    }
 
-	public Integer getLevel() {
-		return this.level;
-	}
+    public void setServerId(String serverId) {
+        this.serverId = serverId;
+    }
 
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
+    public Integer getCard() {
+        return card;
+    }
 
-	public String getFace() {
-		return this.face;
-	}
+    public void setCard(Integer card) {
+        this.card = card;
+    }
 
-	public void setFace(String face) {
-		this.face = face;
-	}
+    public Long getUpgradeTime() {
+        return this.upgradeTime;
+    }
 
-	public Integer getZhenqi() {
-		return this.zhenqi;
-	}
+    public void setUpgradeTime(Long setUpgradeTime) {
+        this.upgradeTime = setUpgradeTime;
+    }
 
-	public void setZhenqi(Integer zhenqi) {
-		this.zhenqi = zhenqi;
-	}
+    public String getPlatform() {
+        return this.platform;
+    }
 
-	public Integer getShengwang() {
-		return this.shengwang;
-	}
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
 
-	public void setShengwang(Integer shengwang) {
-		this.shengwang = shengwang;
-	}
+    public String getPirmaryKeyName() {
+        return "id";
+    }
 
-	public Timestamp getCreateTime() {
-		return this.createTime;
-	}
+    public String getPrimaryKeyValue() {
+        return getId();
+    }
 
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
+    public UserRole copy() {
+        UserRole userRole = new UserRole();
 
-	public Integer getIsSetFangchenmi() {
-		return this.isSetFangchenmi;
-	}
-
-	public void setIsSetFangchenmi(Integer isSetFangchenmi) {
-		this.isSetFangchenmi = isSetFangchenmi;
-	}
-
-	public Integer getChenmiAddOnline() {
-		if (this.chenmiAddOnline == null) {
-			this.chenmiAddOnline = Integer.valueOf(0);
-		}
-		return this.chenmiAddOnline;
-	}
-
-	public void setChenmiAddOnline(Integer chenmiAddOnline) {
-		this.chenmiAddOnline = chenmiAddOnline;
-	}
-
-	public Integer getChenmiAddOffline() {
-		if (this.chenmiAddOffline == null) {
-			this.chenmiAddOffline = Integer.valueOf(0);
-		}
-		return this.chenmiAddOffline;
-	}
-
-	public void setChenmiAddOffline(Integer chenmiAddOffline) {
-		this.chenmiAddOffline = chenmiAddOffline;
-	}
-
-	public String getServerId() {
-		return this.serverId;
-	}
-
-	public void setServerId(String serverId) {
-		this.serverId = serverId;
-	}
-
-	public Integer getRoleType() {
-		return this.roleType;
-	}
-
-	public void setRoleType(Integer roleType) {
-		this.roleType = roleType;
-	}
-
-	public Long getUpgradeTime() {
-		return this.upgradeTime;
-	}
-
-	public void setUpgradeTime(Long setUpgradeTime) {
-		this.upgradeTime = setUpgradeTime;
-	}
-
-	public String getPlatform() {
-		return this.platform;
-	}
-
-	public void setPlatform(String platform) {
-		this.platform = platform;
-	}
-
-	public String getPirmaryKeyName() {
-		return "id";
-	}
-
-	public String getPrimaryKeyValue() {
-		return getId();
-	}
-
-	public UserRole copy() {
-		UserRole userRole = new UserRole();
-
-		userRole.setId(getId());
-		userRole.setUserId(getUserId());
-		userRole.setName(getName());
-		userRole.setJob(getJob());
-		userRole.setSex(getSex());
-		userRole.setRoomCard(getRoomCard());
-		userRole.setLevel(getLevel());
-		userRole.setFace(getFace());
-		userRole.setZhenqi(getZhenqi());
-		userRole.setShengwang(getShengwang());
-		userRole.setCreateTime(getCreateTime());
-		userRole.setOnlineTime(getOnlineTime());
-		userRole.setOfflineTime(getOfflineTime());
-		userRole.setIsSetFangchenmi(getIsSetFangchenmi());
-		userRole.setChenmiAddOnline(getChenmiAddOnline());
-		userRole.setChenmiAddOffline(getChenmiAddOffline());
-		userRole.setServerId(getServerId());
-		userRole.setPlatform(getPlatform());
-		userRole.setRoleType(getRoleType());
-		userRole.setUpgradeTime(getUpgradeTime());
-		userRole.setZhanli(getZhanli());
-		userRole.setLoginCount(getLoginCount());
-		userRole.setTime(getTime());
-		userRole.setLogUpdateTime(getLogUpdateTime());
-		return userRole;
-	}
+        userRole.setId(getId());
+        userRole.setUserId(getUserId());
+        userRole.setName(getName());
+        userRole.setJob(getJob());
+        userRole.setSex(getSex());
+        userRole.setFace(getFace());
+        userRole.setCard(getCard());
+        
+        userRole.setCreateTime(getCreateTime());
+        userRole.setOnlineTime(getOnlineTime());
+        userRole.setOfflineTime(getOfflineTime());
+        userRole.setServerId(getServerId());
+        userRole.setPlatform(getPlatform());
+        userRole.setUpgradeTime(getUpgradeTime());
+        userRole.setLoginCount(getLoginCount());
+        userRole.setLogUpdateTime(getLogUpdateTime());
+        return userRole;
+    }
 }

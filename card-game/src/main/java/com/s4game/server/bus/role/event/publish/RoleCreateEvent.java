@@ -8,7 +8,7 @@ public class RoleCreateEvent implements IEvent {
 	private Object[] data;
 
 	public RoleCreateEvent(UserRole userRole) {
-		this.data = new Object[] { userRole.getUserId(), userRole.getId(), userRole.getLevel() };
+		this.data = new Object[] { userRole.getUserId(), userRole.getId(), userRole.getName() };
 	}
 
 	public Object getData() {

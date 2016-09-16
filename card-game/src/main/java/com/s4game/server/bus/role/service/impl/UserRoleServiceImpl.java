@@ -96,15 +96,12 @@ public class UserRoleServiceImpl implements IUserRoleService {
 		userRole.setSex(1);
 		userRole.setFace(face);
 
-		userRole.setLevel(1);
-
+		userRole.setCard(10);
 		long l = System.currentTimeMillis();
 		userRole.setCreateTime(new Timestamp(l));
 		userRole.setOnlineTime(Long.valueOf(l));
 		userRole.setUpgradeTime(Long.valueOf(l));
 		userRole.setPlatform(platform);
-
-		userRole.setIsSetFangchenmi(0);
 
 		this.userRoleDao.insertRole(userRole);
 

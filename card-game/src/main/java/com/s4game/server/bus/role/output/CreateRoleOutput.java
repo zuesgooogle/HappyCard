@@ -22,7 +22,6 @@ public class CreateRoleOutput {
 					userRole.getName(), 
 					userRole.getJob(), 
 					userRole.getSex(), 
-					userRole.getLevel(), 
 					userRole.getFace() 
 				} 
 		};

@@ -7,24 +7,14 @@
 		<result property="name" column="name"/>
 		<result property="job" column="job"/>
 		<result property="sex" column="sex"/>
-		<result property="roomCard" column="room_card"/>
-		<result property="level" column="level"/>
+		<result property="card" column="card"/>
 		<result property="face" column="face"/>
-		<result property="zhenqi" column="zhenqi"/>
-		<result property="shengwang" column="shengwang"/>
 		<result property="createTime" column="create_time"/>
 		<result property="onlineTime" column="online_time"/>
 		<result property="offlineTime" column="offline_time"/>
-		<result property="isSetFangchenmi" column="is_set_fangchenmi"/>
-		<result property="chenmiAddOnline" column="chenmi_add_online"/>
-		<result property="chenmiAddOffline" column="chenmi_add_offline"/>
 		<result property="serverId" column="server_id"/>
 		<result property="platform" column="platform"/>
-		<result property="roleType" column="role_type"/>
-		<result property="upgradeTime" column="upgrade_time"/>
-		<result property="zhanli" column="zhanli"/>
 		<result property="loginCount" column="login_count"/>
-		<result property="time" column="time"/>
 		<result property="logUpdateTime" column="log_update_time"/>
 	</resultMap>
 	
@@ -35,24 +25,15 @@
 			<if test="name != null "> AND name = #{name} </if>
 			<if test="job != null "> AND job = #{job} </if>
 			<if test="sex != null "> AND sex = #{sex} </if>
-			<if test="roomCard != null "> AND room_card = #{roomCard} </if>
+			<if test="card != null "> AND card = #{card} </if>
 			<if test="level != null "> AND level = #{level} </if>
 			<if test="face != null "> AND face = #{face} </if>
-			<if test="zhenqi != null "> AND zhenqi = #{zhenqi} </if>
-			<if test="shengwang != null "> AND shengwang = #{shengwang} </if>
 			<if test="createTime != null "> AND create_time = #{createTime} </if>
 			<if test="onlineTime != null "> AND online_time = #{onlineTime} </if>
 			<if test="offlineTime != null "> AND offline_time = #offlineTime# </if>
-			<if test="isSetFangchenmi != null "> AND is_set_fangchenmi = #{isSetFangchenmi} </if>
-			<if test="chenmiAddOnline != null "> AND chenmi_add_online = #{chenmiAddOnline} </if>
-			<if test="chenmiAddOffline != null "> AND chenmi_add_offline = #{chenmiAddOffline} </if>
 			<if test="serverId != null "> AND server_id = #{serverId} </if>
 			<if test="platform != null "> AND platform = #{platform} </if>
-			<if test="roleType != null "> AND role_type = #{roleType} </if>
-			<if test="upgradeTime != null "> AND upgrade_time = #{upgradeTime} </if>
-			<if test="zhanli != null "> AND zhanli = #{zhanli} </if>
 			<if test="loginCount != null "> AND login_count = #{loginCount} </if>
-			<if test="time != null "> AND time = #{time} </if>
 			<if test="logUpdateTime != null "> AND log_update_time = #{logUpdateTime} </if>
 		</where>
 	</sql>
@@ -68,24 +49,15 @@
 			, name   
 			, job   
 			, sex   
-			, room_card   
+			, card   
 			, level   
 			, face   
-			, zhenqi   
-			, shengwang   
 			, create_time   
 			, online_time   
 			, offline_time   
-			, is_set_fangchenmi   
-			, chenmi_add_online   
-			, chenmi_add_offline   
 			, server_id   
 			, platform   
-			, role_type   
-			, upgrade_time   
-			, zhanli   
 			, login_count   
-			, time   
 			, log_update_time   
 		)
 		values(
@@ -94,24 +66,14 @@
 			, #{name}
 			, #{job} 
 			, #{sex}  
-			, #{roomCard}  
-			, #{level}  
+			, #{card}  
 			, #{face} 
-			, #{zhenqi}  
-			, #{shengwang}  
 			, #{createTime}  
 			, #{onlineTime}  
 			, #{offlineTime}  
-			, #{isSetFangchenmi}  
-			, #{chenmiAddOnline}  
-			, #{chenmiAddOffline}  
 			, #{serverId}
 			, #{platform}  
-			, #{roleType}  
-			, #{upgradeTime}  
-			, #{zhanli}
 			, #{loginCount}  
-			, #{time}
 			, #{logUpdateTime}  
 		)
 	</insert>
@@ -128,24 +90,14 @@
 			, name = #{name}
 			, job = #{job}
 			, sex = #{sex}  
-			, room_card = #{roomCard}  
-			, level = #{level}  
+			, card = #{card}  
 			, face = #{face}
-			, zhenqi = #{zhenqi}  
-			, shengwang = #{shengwang}  
 			, create_time = #{createTime}  
 			, online_time = #{onlineTime}  
 			, offline_time = #{offlineTime}  
-			, is_set_fangchenmi = #{isSetFangchenmi}  
-			, chenmi_add_online = #{chenmiAddOnline}  
-			, chenmi_add_offline = #{chenmiAddOffline}  
 			, server_id = #{serverId}
 			, platform = #{platform} 
-			, role_type = #{roleType}  
-			, upgrade_time = #{upgradeTime}  
-			, zhanli = #{zhanli}
 			, login_count = #{loginCount}
-			, time = #{time}
 			, log_update_time = #{logUpdateTime}  
 		<include refid="queryByKeyUserRole"/>
 	</update>
@@ -157,24 +109,14 @@
 		,name
 		,job
 		,sex
-		,room_card
-		,level
+		,card
 		,face
-		,zhenqi
-		,shengwang
 		,create_time
 		,online_time
 		,offline_time
-		,is_set_fangchenmi
-		,chenmi_add_online
-		,chenmi_add_offline
 		,server_id
 		,platform
-		,role_type
-		,upgrade_time
-		,zhanli
 		,login_count
-		,time
 		,log_update_time
 		from user_role 
 		<include refid="queryByKeyUserRole"/>
@@ -192,24 +134,14 @@
 		,name
 		,job
 		,sex
-		,room_card
-		,level
+		,card
 		,face
-		,zhenqi
-		,shengwang
 		,create_time
 		,online_time
 		,offline_time
-		,is_set_fangchenmi
-		,chenmi_add_online
-		,chenmi_add_offline
 		,server_id
 		,platform
-		,role_type
-		,upgrade_time
-		,zhanli
 		,login_count
-		,time
 		,log_update_time
 		from user_role 
 		<include refid="queryConditionUserRole"/>
@@ -223,24 +155,14 @@
 		,name
 		,job
 		,sex
-		,room_card
-		,level
+		,card
 		,face
-		,zhenqi
-		,shengwang
 		,create_time
 		,online_time
 		,offline_time
-		,is_set_fangchenmi
-		,chenmi_add_online
-		,chenmi_add_offline
 		,server_id
 		,platform
-		,role_type
-		,upgrade_time
-		,zhanli
 		,login_count
-		,time
 		,log_update_time
 		from user_role 
 		<include refid="queryConditionUserRole"/>
@@ -253,24 +175,14 @@
 		,name
 		,job
 		,sex
-		,room_card
-		,level
+		,card
 		,face
-		,zhenqi
-		,shengwang
 		,create_time
 		,online_time
 		,offline_time
-		,is_set_fangchenmi
-		,chenmi_add_online
-		,chenmi_add_offline
 		,server_id
 		,platform
-		,role_type
-		,upgrade_time
-		,zhanli
 		,login_count
-		,time
 		,log_update_time
 		from user_role 
 	</select>
@@ -282,24 +194,14 @@
 		,name
 		,job
 		,sex
-		,room_card
-		,level
+		,card
 		,face
-		,zhenqi
-		,shengwang
 		,create_time
 		,online_time
 		,offline_time
-		,is_set_fangchenmi
-		,chenmi_add_online
-		,chenmi_add_offline
 		,server_id
 		,platform
-		,role_type
-		,upgrade_time
-		,zhanli
 		,login_count
-		,time
 		,log_update_time
 		from user_role 
 		<include refid="queryConditionUserRole"/>
@@ -312,24 +214,14 @@
 		,name
 		,job
 		,sex
-		,room_card
-		,level
+		,card
 		,face
-		,zhenqi
-		,shengwang
 		,create_time
 		,online_time
 		,offline_time
-		,is_set_fangchenmi
-		,chenmi_add_online
-		,chenmi_add_offline
 		,server_id
 		,platform
-		,role_type
-		,upgrade_time
-		,zhanli
 		,login_count
-		,time
 		,log_update_time 
 		from user_role where name like #name# order by name asc limit 0,50
 	</select>
@@ -355,27 +247,14 @@
 		,name
 		,job
 		,sex
-		,room_card
-		,level
+		,card
 		,face
-		,zhenqi
-		,shengwang
 		,create_time
 		,online_time
 		,offline_time
-		,is_set_fangchenmi
-		,chenmi_add_online
-		,chenmi_add_offline
 		,server_id
 		,platform
-		,role_type
-		,zhanli
 		,login_count
-		,time
-		,upgrade_time
-		,zhanli
-		,login_count
-		,time
 		,log_update_time 
 		from user_role 
 		

@@ -17,7 +17,7 @@ public class InOutput {
 		
 		json.put("userId", userRole.getUserId());
 		json.put("name", userRole.getName());
-		json.put("roomCard", userRole.getRoomCard());
+		json.put("card", userRole.getCard());
 		
 		return json;
 	}

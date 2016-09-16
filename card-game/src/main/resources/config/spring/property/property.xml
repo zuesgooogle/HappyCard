@@ -13,6 +13,7 @@
 		<property name="locations">
 			<list>
 				<value>config/jdbc/jdbc.properties</value>
+				<value>config/server-info.properties</value>
 			</list>
 		</property>
 	</bean>
