@@ -12,28 +12,29 @@ import com.s4game.server.login.service.ILoginService;
 /**
  *
  * @Author zeusgooogle@gmail.com
- * @sine   2015年6月8日 下午3:45:26
+ * @sine 2015年6月8日 下午3:45:26
  *
  */
 @Component
 public class LoginServiceImpl implements ILoginService {
 
-	@Resource
-	private IUserRoleService userRoleService;
-	
-	@Resource
-	private IServerInfoService serverInfoService;
-	
-	@Override
-	public UserRole in(String userId, String serverId, String name, String timestamp, String sign) {
-		//String serverTag = GameConfigureUtil.getServerId() + "-" + GameConfigureUtil.getServerVersion();
-		
-		UserRole userRole = userRoleService.getRole(userId, serverId);
-		if (userRole == null) {
-			userRole = userRoleService.createRole(userId, serverId, name, "", "");
-		}
-		
-		return userRole;
-	}
+    @Resource
+    private IUserRoleService userRoleService;
+
+    @Resource
+    private IServerInfoService serverInfoService;
+
+    @Override
+    public UserRole in(String userId, String serverId, String name, String timestamp, String sign) {
+        // String serverTag = GameConfigureUtil.getServerId() + "-" +
+        // GameConfigureUtil.getServerVersion();
+
+        UserRole userRole = userRoleService.getRole(userId, serverId);
+        if (userRole == null) {
+            userRole = userRoleService.createRole(userId, serverId, name, "", "");
+        }
+        
+        return userRole;
+    }
 
 }

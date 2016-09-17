@@ -16,7 +16,9 @@ public class InOutput {
 		JSONObject json = new JSONObject();
 		
 		json.put("userId", userRole.getUserId());
+		json.put("roleId", userRole.getId());
 		json.put("name", userRole.getName());
+		json.put("face", userRole.getFace());
 		json.put("card", userRole.getCard());
 		
 		return json;

@@ -57,20 +57,21 @@ public class MessageHandler extends SimpleChannelInboundHandler<WebSocketFrame> 
             JSONObject json = JSON.parseObject(request);
             String command = json.getString("cmd");
             
+            String userId = null;
+            
             String sessionId = ChannelAttributeUtil.attr(ctx.channel(), IoConstants.SESSION_KEY);
             switch(command) {
     		case LoginCommands.LOGIN_IN:
+    		    userId = json.getString("userId");
+    		    
     		    channelManager.addChannel(sessionId, ctx.channel());
     		    break;
             }
             
-            String userId = json.getString("userId");
+            String roleId = ChannelAttributeUtil.attr(ctx.channel(), IoConstants.ROLE_KEY);
     		String ip = ChannelAttributeUtil.attr(ctx.channel(), IoConstants.IP_KEY);
     		
-    		
-    		channelManager.addChannel(userId, ctx.channel());
-    		
-    		Message message = new Message(command, json, FromType.CLIENT, DestType.BUS, "", userId, sessionId, ip);
+    		Message message = new Message(command, json, FromType.CLIENT, DestType.BUS, roleId, userId, sessionId, ip);
     		msgSender.swap(message);
             
         } else {

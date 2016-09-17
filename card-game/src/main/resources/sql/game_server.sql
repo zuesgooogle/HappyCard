@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: game_server
 -- ------------------------------------------------------
--- Server version   5.6.22
+-- Server version	5.6.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -97,6 +97,25 @@ CREATE TABLE `role_equip_slot` (
   `log_update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_role_equip_slot_user_role_id` (`user_role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `role_room`
+--
+
+DROP TABLE IF EXISTS `role_room`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role_room` (
+  `id` varchar(36) NOT NULL,
+  `user_role_id` varchar(36) NOT NULL,
+  `number` int(11) NOT NULL COMMENT '房间号',
+  `round` int(11) NOT NULL COMMENT '局',
+  `serial` int(11) NOT NULL COMMENT '是否连中',
+  `win` int(11) NOT NULL COMMENT '是否强制胡牌',
+  `log_update_time` varchar(45) NOT NULL DEFAULT 'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -209,4 +228,4 @@ CREATE TABLE `user_role` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-17  0:01:16
+-- Dump completed on 2016-09-17 14:30:29
