@@ -42,7 +42,7 @@ public class LoginAction {
 		
 		JSONObject data = (JSONObject) message.getData();
 		String userId = data.getString("userId");
-		String name = data.getString("name");
+		String name = "USER-" + System.currentTimeMillis();
 		String serverId = "1";
 		
 		String timestamp = System.currentTimeMillis() + "";

@@ -50,7 +50,6 @@
 			, job   
 			, sex   
 			, card   
-			, level   
 			, face   
 			, create_time   
 			, online_time   
