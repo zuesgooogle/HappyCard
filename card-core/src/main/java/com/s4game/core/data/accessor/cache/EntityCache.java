@@ -67,7 +67,9 @@ public class EntityCache implements IEntityCache {
 	@Override
 	public void addData(IEntity entity, Class<? extends IEntity> clazz) {
 		List<IEntity> list = new ArrayList<IEntity>();
-		list.add(entity);
+		if (null != entity) {
+		    list.add(entity);
+		}
 		
 		addData(list, clazz);
 	}
