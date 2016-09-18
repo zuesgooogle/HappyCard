@@ -25,13 +25,13 @@ public class LoginServiceImpl implements ILoginService {
     private IServerInfoService serverInfoService;
 
     @Override
-    public UserRole in(String userId, String serverId, String name, String timestamp, String sign) {
+    public UserRole in(String userId, String serverId, String name, String face, String timestamp, String sign) {
         // String serverTag = GameConfigureUtil.getServerId() + "-" +
         // GameConfigureUtil.getServerVersion();
 
         UserRole userRole = userRoleService.getRole(userId, serverId);
         if (userRole == null) {
-            userRole = userRoleService.createRole(userId, serverId, name, "", "");
+            userRole = userRoleService.createRole(userId, serverId, name, face, "");
         }
         
         return userRole;

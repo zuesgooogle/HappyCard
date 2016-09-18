@@ -22,7 +22,7 @@ public interface ILoginService {
 	 * @param sign
 	 * @param fangChenmi
 	 */
-	public UserRole in(String userId, String serverId, String name, String timestamp, String sign);
+	public UserRole in(String userId, String serverId, String name, String face, String timestamp, String sign);
 
 
 }

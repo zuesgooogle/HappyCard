@@ -193,12 +193,12 @@ CREATE TABLE `user_account` (
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
   `id` varchar(36) NOT NULL COMMENT '角色唯一主键',
-  `user_id` varchar(36) NOT NULL COMMENT '角色账号id',
-  `name` varchar(36) NOT NULL COMMENT '角色名称',
+  `user_id` varchar(64) NOT NULL COMMENT '角色账号id',
+  `name` varchar(64) CHARACTER SET utf8mb4 NOT NULL COMMENT '角色名称',
   `job` varchar(36) NOT NULL COMMENT '职业',
   `sex` int(1) NOT NULL COMMENT '性别',
   `card` int(1) NOT NULL COMMENT '房卡',
-  `face` varchar(64) DEFAULT NULL COMMENT '头像',
+  `face` varchar(256) DEFAULT NULL COMMENT '头像',
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `online_time` bigint(20) DEFAULT NULL COMMENT '上线时间',
   `offline_time` bigint(20) DEFAULT NULL COMMENT '下线时间',

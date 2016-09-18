@@ -49,13 +49,15 @@ public class LoginAction {
 
         JSONObject data = (JSONObject) message.getData();
         String userId = data.getString("userId");
-        String name = "USER-" + System.currentTimeMillis();
+        String name = data.getString("name");
+        String face = data.getString("face");
         String serverId = "1";
 
+        
         String timestamp = System.currentTimeMillis() + "";
         String sign = "";
 
-        UserRole userRole = loginService.in(userId, serverId, name, timestamp, sign);
+        UserRole userRole = loginService.in(userId, serverId, name, face, timestamp, sign);
         msgSender.send2OneBySessionId(message.getCommand(), userRole.getId(),
                 message.getSessionId(), InOutput.success(userRole));
 
