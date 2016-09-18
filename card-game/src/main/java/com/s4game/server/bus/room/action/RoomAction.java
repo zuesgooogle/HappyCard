@@ -31,7 +31,7 @@ public class RoomAction {
     private IRoleRoomService roleRoomService;
 
     @ActionMapping(mapping = RoomCommands.CREATE_ROOM)
-    public void in(Message message) {
+    public void create(Message message) {
         LOG.info(message.toString());
 
         JSONObject data = (JSONObject) message.getData();
