@@ -11,5 +11,7 @@ public class LoginCommands {
 
 	public static final String LOGIN_IN = "1001";
 	
-	public static final String CREATE_ROLE = "1002";
+	public static final String LOGIN_OUT = "1002";
+	
+	
 }

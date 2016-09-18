@@ -1,8 +1,8 @@
 package com.s4game.core.token.aop;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.s4game.core.message.Message;
 import com.s4game.core.token.TokenManager;
@@ -14,7 +14,7 @@ import com.s4game.core.token.annotation.TokenCheck;
  */
 public class TokenAspect {
 
-    private Logger LOG = LogManager.getLogger(TokenAspect.class);
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
     private TokenManager tokenManager;
 

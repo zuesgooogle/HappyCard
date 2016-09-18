@@ -1,21 +1,21 @@
 package com.s4game.server.io.handler;
 
-import io.netty.channel.ChannelHandler.Sharable;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-
 import java.net.InetSocketAddress;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.s4game.server.io.IoConstants;
 import com.s4game.server.io.global.ChannelManager;
 import com.s4game.server.utils.ChannelAttributeUtil;
+
+import io.netty.channel.ChannelHandler.Sharable;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
  * @Author zeusgooogle@gmail.com
@@ -26,7 +26,7 @@ import com.s4game.server.utils.ChannelAttributeUtil;
 @Component
 public class TopHandler extends ChannelInboundHandlerAdapter {
 
-    private Logger LOG = LogManager.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
 	@Resource
 	private ChannelManager channelManager;

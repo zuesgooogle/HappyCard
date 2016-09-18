@@ -13,12 +13,9 @@
 	<import resource="io-init.xml"/>
 	<import resource="bus-init.xml"/>
 	<import resource="public-init.xml"/>
-	
+    <import resource="stage-init.xml"/>
+    	
 	<!-- 
-	<import resource="public-init.xml"/>
-	
-	<import resource="stage-init.xml"/>
-	
 	<import resource="sync-init.xml"/>
 	<import resource="token-init.xml"/>
 	 -->

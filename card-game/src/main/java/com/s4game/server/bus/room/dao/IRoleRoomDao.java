@@ -10,9 +10,7 @@ import com.s4game.server.bus.room.entity.RoleRoom;
 */
 public interface IRoleRoomDao extends ICacheInitDaoOperation<RoleRoom> {
 
-    RoleRoom initRoom(String roleId);
-    
-    RoleRoom getRoomFromDb(String id);
+    RoleRoom loadRoomFromDb(String roleId);
     
     RoleRoom insertDb(RoleRoom room);
     

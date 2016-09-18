@@ -1,13 +1,13 @@
 package com.s4game.core.io;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * 
@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class WebsocktListener {
 
-    private Logger LOG = LogManager.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
 	private int port;
 

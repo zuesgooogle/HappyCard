@@ -17,8 +17,6 @@ public class RoleRoom extends AbsVersion implements IEntity {
      */
     private static final long serialVersionUID = 5764691377281646396L;
 
-    private String id;
-
     private String userRoleId;
 
     private int number;
@@ -30,14 +28,6 @@ public class RoleRoom extends AbsVersion implements IEntity {
     private boolean win;
 
     private Timestamp logUpdateTime;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUserRoleId() {
         return userRoleId;
@@ -89,18 +79,17 @@ public class RoleRoom extends AbsVersion implements IEntity {
 
     @Override
     public String getPirmaryKeyName() {
-        return "id";
+        return "userRoleId";
     }
 
     @Override
     public Object getPrimaryKeyValue() {
-        return getId();
+        return getUserRoleId();
     }
 
     @Override
     public IEntity copy() {
         RoleRoom room = new RoleRoom();
-        room.setId(getId());
         room.setUserRoleId(getUserRoleId());
         room.setNumber(getNumber());
         room.setRound(getRound());

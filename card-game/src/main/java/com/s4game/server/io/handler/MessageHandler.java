@@ -1,7 +1,7 @@
 package com.s4game.server.io.handler;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
@@ -24,7 +24,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 @Sharable
 public class MessageHandler extends SimpleChannelInboundHandler<WebSocketFrame> {
 
-	private Logger LOG = LogManager.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private ChannelManager channelManager;
@@ -96,6 +96,12 @@ public class MessageHandler extends SimpleChannelInboundHandler<WebSocketFrame> 
 	 * @throws Exception
 	 */
 	private void exitNotify(ChannelHandlerContext ctx) throws Exception {
+	    String roleId = ChannelAttributeUtil.attr(ctx.channel(), IoConstants.ROLE_KEY);
 	    
+	    JSONObject json = new JSONObject();
+	    json.put("cmd", LoginCommands.LOGIN_OUT);
+	    json.put("roleId", roleId);
+	    
+	    channelRead0(ctx, new TextWebSocketFrame(json.toJSONString()));
 	}
 }

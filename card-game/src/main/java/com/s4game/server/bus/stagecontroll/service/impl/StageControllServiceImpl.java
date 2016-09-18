@@ -7,11 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.s4game.core.container.DataContainer;
-import com.s4game.server.bus.role.export.IRoleExportService;
 import com.s4game.server.bus.role.export.RoleWrapper;
+import com.s4game.server.bus.role.service.IUserRoleService;
 import com.s4game.server.bus.share.constants.BusShareConstant;
 import com.s4game.server.bus.stagecontroll.RoleState;
-import com.s4game.server.bus.stagecontroll.command.StageControllCommands;
 import com.s4game.server.bus.stagecontroll.output.StageControllOutput;
 import com.s4game.server.bus.stagecontroll.position.AbsRolePosition;
 import com.s4game.server.bus.stagecontroll.position.RoleLocation;
@@ -37,7 +36,7 @@ public class StageControllServiceImpl implements IStageControllService {
     private Logger LOG = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private IRoleExportService roleExportService;
+    private IUserRoleService userRoleService;
 
     @Resource
     private IStageService stageService;
@@ -57,7 +56,7 @@ public class StageControllServiceImpl implements IStageControllService {
         RoleStageWrapper roleStageWrapper = new RoleStageWrapper(roleStage);
 
         loginHandler(roleStageWrapper, roleId);
-        RoleWrapper roleWrapper = this.roleExportService.getRole(roleId);
+        RoleWrapper roleWrapper = this.userRoleService.getRole(roleId);
 
         int vipLevel = 1;
         Object[] chargeInfo = new Object[] { 1000, 50 };
@@ -189,11 +188,11 @@ public class StageControllServiceImpl implements IStageControllService {
     }
 
     private void leaveStage(AbsRolePosition rolePosition) {
-        busMsgSender.send2Stage(StageControllCommands.INNER_LEAVE_STAGE, rolePosition.getRoleId(), new Object[] { rolePosition.getStageId() });
+//        busMsgSender.send2Stage(StageControllCommands.INNER_LEAVE_STAGE, rolePosition.getRoleId(), new Object[] { rolePosition.getStageId() });
     }
 
     private void enterStage(AbsRolePosition rolePosition) {
-        busMsgSender.send2Stage(StageControllCommands.INNER_ENTER_STAGE, rolePosition.getRoleId(), rolePosition.enterPositionFormat());
+//        busMsgSender.send2Stage(StageControllCommands.INNER_ENTER_STAGE, rolePosition.getRoleId(), rolePosition.enterPositionFormat());
     }
 
     @Override

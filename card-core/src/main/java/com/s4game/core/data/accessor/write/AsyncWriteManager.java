@@ -9,9 +9,9 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.s4game.core.SpringApplicationContext;
 import com.s4game.core.sync.annotation.Sync;
@@ -22,7 +22,7 @@ import com.s4game.core.sync.annotation.Sync;
  */
 public class AsyncWriteManager {
 
-    private Logger LOG = LogManager.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
 	private static final String COMPONENT_NAME = "__async_write";
 

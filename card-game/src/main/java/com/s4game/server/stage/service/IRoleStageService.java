@@ -11,7 +11,7 @@ import com.s4game.server.stage.entity.RoleStage;
 
 public interface IRoleStageService {
 
-    public void createRoleStage(String roleId, int level);
+    public void createRoleStage(String roleId);
 
     public RoleStage loadRoleStage(String roleId);
 

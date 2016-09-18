@@ -3,8 +3,8 @@ package com.s4game.core.data.accessor.cache.manager;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.s4game.core.data.accessor.cache.IEntityCache;
 import com.s4game.core.data.accessor.cache.IEntityCacheLoader;
@@ -20,7 +20,7 @@ import com.s4game.core.data.accessor.write.AsyncWriteManager;
 
 public class CacheManager {
     
-    private Logger LOG = LogManager.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
 	private ConcurrentMap<String, IEntityCache> caches = new ConcurrentHashMap<String, IEntityCache>();
 

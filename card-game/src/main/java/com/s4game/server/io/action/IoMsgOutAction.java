@@ -3,8 +3,8 @@ package com.s4game.server.io.action;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.s4game.core.action.annotation.ActionMapping;
 import com.s4game.core.action.annotation.ActionWorker;
@@ -23,7 +23,7 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 @ActionWorker
 public class IoMsgOutAction {
 
-    private Logger LOG = LogManager.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
     @Resource
     private ChannelManager channelManager;

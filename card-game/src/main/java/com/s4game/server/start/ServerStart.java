@@ -5,8 +5,8 @@ import java.io.FileWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.s4game.server.share.ApplicationInit;
 
@@ -19,7 +19,7 @@ import com.s4game.server.share.ApplicationInit;
 
 public class ServerStart {
 
-    private static Logger LOG = LogManager.getLogger(ServerStart.class);
+    public static final Logger LOG = LoggerFactory.getLogger(ServerStart.class);
 	
 	public static void main(String[] args) {
 		

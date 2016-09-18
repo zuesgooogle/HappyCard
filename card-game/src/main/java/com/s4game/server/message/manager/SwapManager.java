@@ -1,8 +1,9 @@
 package com.s4game.server.message.manager;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.s4game.core.message.Message;
@@ -20,16 +21,19 @@ import com.s4game.server.share.moduleinit.Group;
 @Component
 public class SwapManager {
 
-    private Logger LOG = LogManager.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
-    @Autowired
+    @Resource
     private IMsgDispatcher ioDispatcher;
 
-    @Autowired
-    private IMsgDispatcher busDispatcher;
-    
-    @Autowired
+    @Resource
     private IMsgDispatcher publicDispatcher;
+
+    @Resource
+    private IMsgDispatcher stageDispatcher;
+    
+    @Resource
+    private IMsgDispatcher gsDispatcher;
     
     public void swap(Message message) {
         FromType from = message.getFrom();
@@ -66,15 +70,13 @@ public class SwapManager {
 
         switch (group) {
         case BUS:
-        	busDispatcher.in(message);
-        	break;
         case STAGE:
         case STAGE_CONTROL:
-
+            gsDispatcher.in(message);
             break;
         case LOGIN:
         case PUBLIC:
-        	publicDispatcher.in(message);
+            toPublic(message);
             break;
         default:
             LOG.error("message cmd: {} not find group.", command);
@@ -93,13 +95,13 @@ public class SwapManager {
             toClient(message);
             break;
         case BUS:
-
+            this.gsDispatcher.in(message);
             break;
         case PUBLIC:
-
+            toPublic(message);
             break;
         case STAGE:
-
+            toStage(message);
             break;
             
         case INOUT:
@@ -112,6 +114,14 @@ public class SwapManager {
 
     private void toClient(Message message) {
         ioDispatcher.in(message);
+    }
+
+    private void toPublic(Message message) {
+        publicDispatcher.in(message);
+    }
+
+    private void toStage(Message message) {
+        stageDispatcher.in(message);
     }
 
 }

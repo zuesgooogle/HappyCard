@@ -37,7 +37,7 @@ public class RoleStageServiceImpl implements IRoleStageService {
     private IStageControllService stageControllService;
     
     @Override
-    public void createRoleStage(String roleId, int level) {
+    public void createRoleStage(String roleId) {
         RoleStage roleStage = new RoleStage();
 
         roleStage.setUserRoleId(roleId);

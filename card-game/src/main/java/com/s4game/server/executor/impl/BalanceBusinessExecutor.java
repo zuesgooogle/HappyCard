@@ -8,8 +8,8 @@ import java.util.concurrent.Executors;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.s4game.server.executor.IBusinessExecutor;
 import com.s4game.server.executor.IRuleChecker;
@@ -23,8 +23,8 @@ import com.s4game.server.share.log.Log;
  */
 public class BalanceBusinessExecutor implements IBusinessExecutor {
 
-    private Logger LOG = LogManager.getLogger(Log.SERVER_STATUS_LOGGER);
-
+    private Logger LOG = LoggerFactory.getLogger(Log.SERVER_STATUS_LOGGER);
+    
 	private String name;
 	private int loadSize = 11;
 	private int loadCurror = 0;

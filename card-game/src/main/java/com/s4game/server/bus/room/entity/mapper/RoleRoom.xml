@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ROLE_ROOM">
 	<resultMap id="roleRoom" type="com.s4game.server.bus.room.entity.RoleRoom" >
-		<result property="id" column="id"/>
-		<result property="userRoleId" column="role_room_id"/>
+		<result property="userRoleId" column="user_role_id"/>
 		<result property="number" column="number"/>
 		<result property="round" column="round"/>
 		<result property="serial" column="serial"/>
@@ -14,7 +13,6 @@
 	
 	<sql id="queryConditionRoleRoom">
 		<where>
-			<if test="id != null "> AND id = #{id} </if>
 			<if test="userRoleId != null "> AND user_role_id = #{userRoleId} </if>
 			<if test="number != null "> AND number = #{number} </if>
 			<if test="logUpdateTime != null "> AND log_update_time = #{logUpdateTime} </if>
@@ -22,13 +20,12 @@
 	</sql>
 	
 	<sql id="queryByKeyRoleRoom">
-		where id = #{id}
+		where user_role_id = #{userRoleId}
 	</sql>
 	
 	<insert id="insertRoleRoom" parameterType="com.s4game.server.bus.room.entity.RoleRoom">
 		insert into role_room(
-			id   
-			, user_role_id   
+			user_role_id   
 			, number
 			, round   
 			, serial   
@@ -36,8 +33,7 @@
 			, log_update_time   
 		)
 		values(
-			#{id}
-			, #{userRoleId}  
+			#{userRoleId}  
 			, #{number}
 			, #{round}
 			, #{serial} 
@@ -53,8 +49,7 @@
 	
 	<update id="updateRoleRoom" parameterType="com.s4game.server.bus.room.entity.RoleRoom">
 		update role_room set
-			id = #{id}
-			, user_role_id = #{userRoleId}  
+			user_role_id = #{userRoleId}  
 			, number = #{number}
 			, round = #{round}
 			, serial = #{serial}
@@ -65,8 +60,7 @@
 	
 	<select id="selectOneRoleRoom" resultMap="roleRoom">
 		select 
-		id
-		,user_role_id
+		user_role_id
 		,number
 		,round
 		,serial
@@ -83,8 +77,7 @@
 	
 	<select id="selectMultiPagingRoleRoom" parameterType="java.util.Map" resultMap="roleRoom">
 		select 
-        id
-        ,user_role_id
+        user_role_id
         ,number
         ,round
         ,serial
@@ -97,8 +90,7 @@
 
 	<select id="selectListRoleRoom" parameterType="java.util.Map" resultMap="roleRoom">
 		select 
-        id
-        ,user_role_id
+        user_role_id
         ,number
         ,round
         ,serial
@@ -110,8 +102,7 @@
 	
 	<select id="selectAllRoleRoom" resultMap="roleRoom">
 		select 
-        id
-        ,user_role_id
+        user_role_id
         ,number
         ,round
         ,serial
@@ -122,8 +113,7 @@
 	
 	<select id="selectOneByParamsRoleRoom" resultMap="roleRoom">
 	    select 
-        id
-        ,user_role_id
+        user_role_id
         ,number
         ,round
         ,serial

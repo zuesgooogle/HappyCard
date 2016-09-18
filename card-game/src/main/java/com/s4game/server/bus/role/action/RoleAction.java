@@ -1,13 +1,10 @@
 package com.s4game.server.bus.role.action;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.s4game.core.action.annotation.ActionMapping;
 import com.s4game.core.action.annotation.ActionWorker;
-import com.s4game.core.message.Message;
-import com.s4game.server.bus.role.command.RoleCommands;
 import com.s4game.server.bus.swap.BusMsgSender;
 
 /**
@@ -19,7 +16,7 @@ import com.s4game.server.bus.swap.BusMsgSender;
 @ActionWorker
 public class RoleAction {
 
-	private Logger LOG = LogManager.getLogger(getClass());
+	private Logger LOG = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private BusMsgSender msgSender;

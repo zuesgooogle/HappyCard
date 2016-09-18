@@ -12,8 +12,8 @@ public class RoomOutput {
 
     public static JSONObject room(RoleRoom room) {
         JSONObject json = new JSONObject();
-        json.put("roleId", room.getUserRoleId());
-        json.put("number", room.getNumber());
+        json.put("roomId", room.getNumber());
+        json.put("round", room.getRound());
         json.put("serial", room.isSerial());
         json.put("win", room.isWin());
         

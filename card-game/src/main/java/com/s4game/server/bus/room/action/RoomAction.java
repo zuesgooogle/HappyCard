@@ -1,7 +1,7 @@
 package com.s4game.server.bus.room.action;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONObject;
@@ -22,8 +22,8 @@ import com.s4game.server.bus.swap.BusMsgSender;
 @ActionWorker
 public class RoomAction {
 
-    private Logger LOG = LogManager.getLogger(getClass());
-
+    private Logger LOG = LoggerFactory.getLogger(getClass());
+    
     @Autowired
     private BusMsgSender msgSender;
     

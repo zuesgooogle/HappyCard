@@ -7,8 +7,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.s4game.server.executor.IBusinessExecutor;
 import com.s4game.server.executor.Route;
@@ -24,7 +24,7 @@ import com.s4game.server.share.log.Log;
  */
 public class TimeoutBusinessExecutor implements IBusinessExecutor {
 
-    private Logger LOG = LogManager.getLogger(Log.SERVER_STATUS_LOGGER);
+    private Logger LOG = LoggerFactory.getLogger(Log.SERVER_STATUS_LOGGER);
 
 	private HashMap<String, ExecutorPoolGroup> groups = new HashMap<String, ExecutorPoolGroup>();
 

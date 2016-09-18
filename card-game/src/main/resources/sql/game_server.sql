@@ -1,27 +1,52 @@
--- MySQL dump 10.13  Distrib 5.6.19, for osx10.7 (i386)
---
--- Host: 127.0.0.1    Database: game_server
--- ------------------------------------------------------
--- Server version	5.6.22
+/*
+Navicat MySQL Data Transfer
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+Source Server         : localhost
+Source Server Version : 50620
+Source Host           : localhost:3306
+Source Database       : game_server
 
---
--- Table structure for table `id_gen`
---
+Target Server Type    : MYSQL
+Target Server Version : 50620
+File Encoding         : 65001
 
+Date: 2016-09-18 16:01:54
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for guild
+-- ----------------------------
+DROP TABLE IF EXISTS `guild`;
+CREATE TABLE `guild` (
+  `id` varchar(36) NOT NULL COMMENT '主键id',
+  `name` varchar(20) NOT NULL COMMENT '帮派名字',
+  `user_role_id` varchar(36) NOT NULL COMMENT '帮主的角色id',
+  `fighting` bigint(20) DEFAULT '0' COMMENT '总战力',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` timestamp NULL DEFAULT NULL,
+  `log_update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for guild_member
+-- ----------------------------
+DROP TABLE IF EXISTS `guild_member`;
+CREATE TABLE `guild_member` (
+  `id` varchar(36) NOT NULL DEFAULT '' COMMENT '主键',
+  `guild_id` varchar(36) NOT NULL COMMENT '对应公会表主键',
+  `user_role_id` varchar(36) NOT NULL COMMENT '角色唯一主键',
+  `position` int(11) NOT NULL COMMENT '角色在公会里的职位 ',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `log_update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for id_gen
+-- ----------------------------
 DROP TABLE IF EXISTS `id_gen`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `id_gen` (
   `id` varchar(100) NOT NULL DEFAULT '' COMMENT '主键',
   `module_name` varchar(36) NOT NULL DEFAULT '' COMMENT '模块名称',
@@ -30,15 +55,11 @@ CREATE TABLE `id_gen` (
   `version` int(10) unsigned NOT NULL COMMENT '版本',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `role_account`
---
-
+-- ----------------------------
+-- Table structure for role_account
+-- ----------------------------
 DROP TABLE IF EXISTS `role_account`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role_account` (
   `id` varchar(36) NOT NULL,
   `user_role_id` varchar(36) NOT NULL COMMENT '角色唯一id',
@@ -50,15 +71,11 @@ CREATE TABLE `role_account` (
   PRIMARY KEY (`id`),
   KEY `idx_role_account_user_role_id` (`user_role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `role_bag_slot`
---
-
+-- ----------------------------
+-- Table structure for role_bag_slot
+-- ----------------------------
 DROP TABLE IF EXISTS `role_bag_slot`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role_bag_slot` (
   `id` varchar(36) NOT NULL,
   `slot_num` int(11) NOT NULL COMMENT '格子编号',
@@ -74,15 +91,11 @@ CREATE TABLE `role_bag_slot` (
   PRIMARY KEY (`id`),
   KEY `idx_role_bag_slot_user_role_id` (`user_role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `role_equip_slot`
---
-
+-- ----------------------------
+-- Table structure for role_equip_slot
+-- ----------------------------
 DROP TABLE IF EXISTS `role_equip_slot`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role_equip_slot` (
   `id` varchar(36) NOT NULL COMMENT '主键',
   `slot_num` int(11) NOT NULL COMMENT '对应装备格子',
@@ -98,34 +111,25 @@ CREATE TABLE `role_equip_slot` (
   PRIMARY KEY (`id`),
   KEY `idx_role_equip_slot_user_role_id` (`user_role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `role_room`
---
-
+-- ----------------------------
+-- Table structure for role_room
+-- ----------------------------
 DROP TABLE IF EXISTS `role_room`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role_room` (
-  `id` varchar(36) NOT NULL,
   `user_role_id` varchar(36) NOT NULL,
   `number` int(11) NOT NULL COMMENT '房间号',
   `round` int(11) NOT NULL COMMENT '局',
   `serial` int(11) NOT NULL COMMENT '是否连中',
   `win` int(11) NOT NULL COMMENT '是否强制胡牌',
   `log_update_time` varchar(45) NOT NULL DEFAULT 'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`user_role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `role_stage`
---
-
+-- ----------------------------
+-- Table structure for role_stage
+-- ----------------------------
 DROP TABLE IF EXISTS `role_stage`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role_stage` (
   `user_role_id` varchar(36) NOT NULL,
   `map_id` varchar(255) DEFAULT NULL,
@@ -151,15 +155,11 @@ CREATE TABLE `role_stage` (
   `log_update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `server_info`
---
-
+-- ----------------------------
+-- Table structure for server_info
+-- ----------------------------
 DROP TABLE IF EXISTS `server_info`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `server_info` (
   `id` varchar(20) NOT NULL COMMENT '主键',
   `start_time` timestamp NULL DEFAULT NULL COMMENT '开服时间',
@@ -168,15 +168,11 @@ CREATE TABLE `server_info` (
   `log_update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `user_account`
---
-
+-- ----------------------------
+-- Table structure for user_account
+-- ----------------------------
 DROP TABLE IF EXISTS `user_account`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_account` (
   `id` varchar(48) NOT NULL COMMENT '主键，根据user_role表里面的 user_id和server_id加@号拼接',
   `user_guid` varchar(36) NOT NULL COMMENT '对应user_role表里面的user_id',
@@ -190,15 +186,11 @@ CREATE TABLE `user_account` (
   PRIMARY KEY (`id`),
   KEY `user_account_index` (`user_guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `user_role`
---
-
+-- ----------------------------
+-- Table structure for user_role
+-- ----------------------------
 DROP TABLE IF EXISTS `user_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_role` (
   `id` varchar(36) NOT NULL COMMENT '角色唯一主键',
   `user_id` varchar(36) NOT NULL COMMENT '角色账号id',
@@ -217,15 +209,3 @@ CREATE TABLE `user_role` (
   PRIMARY KEY (`id`),
   KEY `idx_user_role_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2016-09-17 14:30:29

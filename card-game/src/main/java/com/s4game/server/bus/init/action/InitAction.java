@@ -9,15 +9,20 @@ import com.s4game.server.bus.init.command.InitCommands;
 import com.s4game.server.bus.init.service.InitService;
 
 @ActionWorker
-public class BusInitAction {
-    
+public class InitAction {
+
     @Autowired
     private InitService ioService;
 
     @ActionMapping(mapping = InitCommands.ROLE_IN)
     public void roleIn(Message message) {
         String ip = (String) message.getData();
-        
-        this.ioService.roleIn(message.getRoleId(), ip);
+
+        ioService.roleIn(message.getRoleId(), ip);
+    }
+
+    @ActionMapping(mapping = InitCommands.ROLE_OUT)
+    public void roleOut(Message message) {
+        ioService.roleOut(message.getRoleId());
     }
 }

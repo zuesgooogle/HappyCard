@@ -4,8 +4,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import com.s4game.server.bus.role.export.IRoleExportService;
 import com.s4game.server.bus.role.export.RoleWrapper;
+import com.s4game.server.bus.role.service.IUserRoleService;
 import com.s4game.server.stage.model.core.element.impl.state.StateManager;
 import com.s4game.server.stage.model.core.stage.IStage;
 
@@ -19,10 +19,10 @@ import com.s4game.server.stage.model.core.stage.IStage;
 public class RoleFactory {
 
     @Resource
-    private IRoleExportService roleExportService;
+    private IUserRoleService userRoleService;
     
     public IRole create(String roleId, IStage stage) {
-        RoleWrapper roleWrapper = roleExportService.getRole(roleId);
+        RoleWrapper roleWrapper = userRoleService.getRole(roleId);
         
         RoleBusinessData businessData = new RoleBusinessData(roleWrapper);
         

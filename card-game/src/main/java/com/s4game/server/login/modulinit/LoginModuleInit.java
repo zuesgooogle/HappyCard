@@ -20,7 +20,7 @@ public class LoginModuleInit extends PublicModuleInit {
 
 	@Override
 	protected InCmd getInCmd() {
-		return new InCmd(LoginModuleInfo.MODULE_NAME, Group.LOGIN.name, new String[] {LoginCommands.LOGIN_IN});
+		return new InCmd(LoginModuleInfo.MODULE_NAME, Group.LOGIN.name, new String[] {LoginCommands.LOGIN_IN, LoginCommands.LOGIN_OUT});
 	}
 
 	@Override

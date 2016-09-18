@@ -21,7 +21,7 @@ public class RoleRoomCacheModelLoader implements IEntityCacheModelLoader {
     
     @Override
     public void load(String id, IEntityCache entityCache) {
-        entityCache.addData(roleRoomDao.initRoom(id), RoleRoom.class);
+        entityCache.addData(roleRoomDao.loadRoomFromDb(id), RoleRoom.class);
     }
 
 }

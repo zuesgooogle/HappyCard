@@ -1,7 +1,7 @@
 package com.s4game.server.share.log;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -19,7 +19,7 @@ public class Log {
     
     
     
-    private static Logger LOG = LogManager.getLogger(ERROR_LOGGER);
+    private static Logger LOG = LoggerFactory.getLogger(ERROR_LOGGER);
     
     public static void error(String message, Object... params) {
         LOG.error(message, params);
