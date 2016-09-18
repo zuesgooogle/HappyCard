@@ -15,9 +15,7 @@
 			
 			<!-- 每个服务器的个性化配置，不需要打包 -->
 			<excludes>
-				<!-- 
 				<exclude>data/jdbc.properties</exclude>
-				 -->
 			</excludes>
 		</fileSet>
 		<fileSet>
