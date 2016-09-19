@@ -126,7 +126,7 @@
 				<artifactId>logback-ext-spring</artifactId>
 				<version>0.1.4</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.google.protobuf</groupId>
 				<artifactId>protobuf-java</artifactId>
@@ -137,6 +137,12 @@
 				<artifactId>netty-all</artifactId>
 				<version>4.0.27.Final</version>
 			</dependency>
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty-codec-http</artifactId>
+				<version>4.0.27.Final</version>
+			</dependency>
+
 			<dependency>
 				<groupId>commons-lang</groupId>
 				<artifactId>commons-lang</artifactId>
