@@ -15,6 +15,7 @@ import com.s4game.server.stage.model.core.stage.IStage;
 import com.s4game.server.stage.model.element.role.IRole;
 import com.s4game.server.stage.service.IRoleStageService;
 import com.s4game.server.stage.service.IStageService;
+import com.s4game.server.stage.utils.RoleStageUtil;
 
 /**
  *
@@ -70,21 +71,22 @@ public class RoleStageServiceImpl implements IRoleStageService {
     public void syncRoleStageData(String roleId, String stageId) {
         IStage stage = stageService.getStage(stageId);
         IRole role = stage.getElement(roleId, ElementType.ROLE);
-        
         if( null == role ) {
             LOG.error("sync role stage data error. role: {} not found.", roleId);
         }
         
+        String copyInfo = null;
         String mapId = null;
         int x = 0;
         int y = 0;
-        
         if( stage.isCopy()) {
             AbsRolePosition rolePosition = stageControllService.getOfflineSaveMapPosition(roleId);
             
             mapId = rolePosition.getMapId();
             x = rolePosition.getX();
             y = rolePosition.getY();
+            
+            copyInfo = RoleStageUtil.encodeOfflineCopy(role);
         }
         
         //更新缓存
@@ -93,6 +95,7 @@ public class RoleStageServiceImpl implements IRoleStageService {
         roleStage.setMapId(mapId);
         roleStage.setMapX(x);
         roleStage.setMapY(y);
+        roleStage.setCopyInfo(copyInfo);
         
         roleStageDao.cacheUpdate(roleStage, roleId);
     }

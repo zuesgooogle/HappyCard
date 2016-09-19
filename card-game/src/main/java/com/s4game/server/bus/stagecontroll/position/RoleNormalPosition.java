@@ -1,5 +1,6 @@
 package com.s4game.server.bus.stagecontroll.position;
 
+import com.s4game.server.bus.map.MapType;
 import com.s4game.server.stage.constants.StageCopyConstant;
 
 /**
@@ -12,7 +13,7 @@ import com.s4game.server.stage.constants.StageCopyConstant;
 public class RoleNormalPosition extends AbsRolePosition {
 
     public RoleNormalPosition(String roleId, String mapId, int x, int y) {
-        super(roleId, mapId, x, y);
+        super(roleId, mapId, MapType.IDLE, x, y);
     }
 
     @Override

@@ -22,6 +22,8 @@ public class BusMsgSender {
     @Resource
     private IMsgDispatcher busDispatcher;
     
+    @Resource
+    private IMsgDispatcher gsDispatcher;
     
     @Resource
     private SwapManager swapManager;
@@ -41,12 +43,17 @@ public class BusMsgSender {
     }
     
     public void send2One(String command, String roleId, Object data) {
-        //Object[] message = new Object[]{command, data, DestType.CLIENT.getValue(), FromType.BUS.getValue(), 1, null, roleId, null, 0, null};
-        
         Message message = new Message(command, data, FromType.BUS, DestType.CLIENT, roleId);
         message.setRoute(1); // send to one player
         
         swapManager.swap(message);
+    }
+    
+    public void send2Stage(String command, String roleId, String stageId, Object data) {
+        Message message = new Message(command, data, FromType.BUS, DestType.STAGE, roleId);
+        message.setStageId(stageId);
+        
+        gsDispatcher.in(message);
     }
     
 }

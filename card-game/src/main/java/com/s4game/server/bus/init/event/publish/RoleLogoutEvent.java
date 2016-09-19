@@ -7,8 +7,8 @@ public class RoleLogoutEvent implements IEvent {
     
     private Object[] data = null;
 
-    public RoleLogoutEvent(String paramString1, String paramString2) {
-        this.data = new Object[] { paramString1, paramString2 };
+    public RoleLogoutEvent(String roleId, String paramString2) {
+        this.data = new Object[] { roleId, paramString2 };
     }
 
     public String getType() {

@@ -44,4 +44,14 @@ public class RoomAction {
         RoleRoom room = roleRoomService.createRoom(roleId, round, serial, win);
         msgSender.send2One(message.getCommand(), roleId, RoomOutput.room(room));
     }
+    
+    @ActionMapping(mapping = RoomCommands.JOIN_ROOM)
+    public void join(Message message) {
+        JSONObject data = (JSONObject) message.getData();
+        
+        String roleId = message.getRoleId();
+        int roomId = data.getIntValue("roomId");
+        
+        roleRoomService.enterRoom(roleId, roomId + "");
+    }
 }

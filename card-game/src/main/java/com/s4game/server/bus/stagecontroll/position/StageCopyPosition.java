@@ -1,7 +1,5 @@
 package com.s4game.server.bus.stagecontroll.position;
 
-import com.s4game.server.utils.id.IdUtil;
-
 /**
  *
  * @Author zeusgooogle@gmail.com
@@ -17,12 +15,12 @@ public class StageCopyPosition extends AbsRolePosition {
     
     private Object[] additionalData;
     
-    public StageCopyPosition(String roleId, String mapId,  int x, int y, Object[] additionalData) {
-        this(roleId, mapId, x, y, IdUtil.nextString(roleId + "_"), additionalData);
+    public StageCopyPosition(String roleId, String mapId, int mapType, int x, int y, Object[] additionalData) {
+        this(roleId, mapId, mapType, x, y, roleId + "_" + mapId, additionalData);
     }
     
-    public StageCopyPosition(String roleId, String mapId, int x, int y, String stageId, Object[] additionalData) {
-        super(roleId, mapId, x, y);
+    public StageCopyPosition(String roleId, String mapId, int mapType, int x, int y, String stageId, Object[] additionalData) {
+        super(roleId, mapId, mapType, x, y);
         this.stageId = stageId;
         this.additionalData = additionalData;
     }

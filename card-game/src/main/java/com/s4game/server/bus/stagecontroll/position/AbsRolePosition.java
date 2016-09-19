@@ -15,11 +15,14 @@ public abstract class AbsRolePosition {
     
     private int y;
     
+    private int mapType;
+    
     private String roleId;
     
-    public AbsRolePosition(String roleId, String mapId, int x, int y) {
+    public AbsRolePosition(String roleId, String mapId, int mapType, int x, int y) {
         this.roleId = roleId;
         this.mapId = mapId;
+        this.mapType = mapType;
         this.x = x;
         this.y = y;
     }
@@ -40,6 +43,10 @@ public abstract class AbsRolePosition {
         return roleId;
     }
    
+    public int getMapType() {
+        return mapType;
+    }
+
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;

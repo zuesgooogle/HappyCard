@@ -3,9 +3,8 @@ package com.s4game.server.stage.service.impl;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.s4game.core.event.IEventService;
 import com.s4game.server.bus.stagecontroll.command.StageControllCommands;
@@ -18,6 +17,7 @@ import com.s4game.server.stage.model.core.stage.IStage;
 import com.s4game.server.stage.model.core.stage.Point;
 import com.s4game.server.stage.model.element.role.IRole;
 import com.s4game.server.stage.model.element.role.RoleFactory;
+import com.s4game.server.stage.room.RoomStageFactory;
 import com.s4game.server.stage.service.IStageService;
 import com.s4game.server.stage.swap.StageMsgSender;
 
@@ -27,16 +27,16 @@ import com.s4game.server.stage.swap.StageMsgSender;
  * @sine   2015年7月17日 上午11:15:41
  *
  */
-@Component
+@Service
 public class StageServiceImpl implements IStageService {
 
-    @Resource
+    @Autowired
     private IEventService eventService;
     
-    @Resource
+    @Autowired
     private StageMsgSender stageMsgSender;
     
-    @Resource
+    @Autowired
     private RoleFactory roleFactory;
     
     private ConcurrentMap<String, IStage> stageMap = new ConcurrentHashMap<String, IStage>();
@@ -45,10 +45,8 @@ public class StageServiceImpl implements IStageService {
     public boolean checkAndCreateStage(String stageId, String mapId) {
         IStage stage = stageMap.get(stageId);
         if( null == stage ) {
-            //stage = aoiStageFactory.create(stageId, mapConfigService.load(mapId));
+            stage = RoomStageFactory.create(stageId, mapId);
             stageMap.put(stageId, stage);
-            
-            //stage.getStageProduceManager().produceAll();
             
             eventService.publish(new StageCreateEvent(mapId, stageId));
             return true;
@@ -143,10 +141,7 @@ public class StageServiceImpl implements IStageService {
         stage.enter(role, x, y);
         eventService.publish(new RoleEnterStageEvent(stageId, mapId, roleId));
         
-        //TODO add born buffer
-        
         role.getEventManager().fireLoginEvent();
-        
     }
 
     @Override

@@ -9,6 +9,11 @@ public class RoomStage extends AbsStage {
     
     private String mapId;
     
+    public RoomStage(String stageId, String mapId) {
+        this.id = stageId;
+        this.mapId = mapId;
+    }
+    
     @Override
     public String getId() {
         return id;
@@ -21,7 +26,7 @@ public class RoomStage extends AbsStage {
 
     @Override
     public boolean isCopy() {
-        return false;
+        return true;
     }
 
     @Override
