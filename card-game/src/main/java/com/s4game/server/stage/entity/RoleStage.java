@@ -197,16 +197,16 @@ public class RoleStage extends AbsVersion implements Serializable, IEntity {
         return this.copyInfo;
     }
 
-    public void setCopyInfo(String paramString) {
-        this.copyInfo = paramString;
+    public void setCopyInfo(String copyInfo) {
+        this.copyInfo = copyInfo;
     }
 
     public Timestamp getLogUpdateTime() {
         return this.logUpdateTime;
     }
 
-    public void setLogUpdateTime(Timestamp paramTimestamp) {
-        this.logUpdateTime = paramTimestamp;
+    public void setLogUpdateTime(Timestamp logUpdateTime) {
+        this.logUpdateTime = logUpdateTime;
     }
 
     public String getPirmaryKeyName() {
