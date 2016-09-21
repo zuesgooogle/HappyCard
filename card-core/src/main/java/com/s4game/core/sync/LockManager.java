@@ -7,7 +7,6 @@ import java.util.concurrent.ConcurrentMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * @author zeusgooogle
  * @date 2014-10-2 下午07:40:53
@@ -16,9 +15,9 @@ public class LockManager {
 
     private Logger LOG = LoggerFactory.getLogger(getClass());
 
-    private ConcurrentMap<String, ConcurrentMap<String, Lock>> components = new ConcurrentHashMap<String, ConcurrentMap<String, Lock>>();
+    private ConcurrentMap<String, ConcurrentMap<String, Lock>> components = new ConcurrentHashMap<>();
 
-    private static final long  CLEAN_PERIOD = 1800000L;
+    private static final long CLEAN_PERIOD = 1800000L;
 
     public LockManager() {
         Thread thread = new Thread("LockManager-Cleaner") {
@@ -38,20 +37,20 @@ public class LockManager {
                 }
             }
         };
-        
+
         thread.setDaemon(true);
         thread.start();
     }
 
-    public Lock getLock(String component, String roleId) {
+    public Lock getLock(String component, String key) {
         ConcurrentMap<String, Lock> map = getComponentLocks(component);
         synchronized (map) {
-            Lock lock = map.get(roleId);
+            Lock lock = map.get(key);
             if (null == lock) {
-                lock = new Lock(roleId);
-                map.put(roleId, lock);
+                lock = new Lock(key);
+                map.put(key, lock);
             }
-            
+
             lock.update();
             return lock;
         }
@@ -76,20 +75,21 @@ public class LockManager {
         long l = 0L;
         Iterator<ConcurrentMap<String, Lock>> iterator = this.components.values().iterator();
         while (iterator.hasNext()) {
-            ConcurrentMap<String, Lock> localConcurrentMap = iterator.next();
-            synchronized (localConcurrentMap) {
-                Iterator<Lock> localIterator2 = localConcurrentMap.values().iterator();
-                while (localIterator2.hasNext()) {
-                    Lock localLock = localIterator2.next();
+            ConcurrentMap<String, Lock> locks = iterator.next();
+            synchronized (locks) {
+                Iterator<Lock> iterator2 = locks.values().iterator();
+                while (iterator2.hasNext()) {
+                    Lock localLock = iterator2.next();
                     if (localLock.canClean()) {
-                        localConcurrentMap.remove(localLock.getKey());
+                        locks.remove(localLock.getKey());
                         i++;
                     }
                 }
-                l += localConcurrentMap.size();
+                l += locks.size();
             }
         }
-        LOG.error("LockManager-Cleaner:cleaned {},remain {}", new Object[] { Integer.valueOf(i), Long.valueOf(l) });
+        
+        LOG.error("LockManager-Cleaner:cleaned {}, remain {}", new Object[] { Integer.valueOf(i), Long.valueOf(l) });
     }
 
 }

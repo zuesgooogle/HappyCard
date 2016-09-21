@@ -9,6 +9,20 @@
 
 	<bean id="lockManager" class="com.s4game.core.sync.LockManager"></bean>
 	
+	<bean id="syncAspect" class="com.s4game.core.sync.aop.SyncAspect">
+	   <property name="lockManager" ref="lockManager"/>
+	</bean>
+	
+	<aop:config>
+    
+        <aop:aspect ref="syncAspect">
+            <aop:pointcut id="sync"
+                expression="@annotation(com.s4game.core.sync.annotation.Sync) and @annotation(sync)"/>
+            <aop:around pointcut-ref="sync" method="sync" arg-names="sync"/>
+        </aop:aspect>
+        
+   </aop:config>
+	
     <!-- 
 	<bean id="publicSync" class="com.s4game.server.public_.sync.PublicSyncInterceptor"></bean>
 	
