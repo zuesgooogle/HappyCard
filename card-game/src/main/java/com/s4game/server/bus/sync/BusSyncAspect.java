@@ -35,6 +35,7 @@ public class BusSyncAspect {
 	@Resource
 	private IRoleStateService roleStateService;
 
+	@Pointcut(value = "execution(* com.s4game.server.bus..*Action.*(..) )")
 	public void pointcut() {
 
 	}
