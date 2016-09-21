@@ -13,7 +13,7 @@ import java.util.Map;
 
 public abstract class AbsStage implements IStage {
 
-    private Map<ElementType, Map<String, IStageElement>> elementMaps = new HashMap<ElementType, Map<String, IStageElement>>();
+    private Map<ElementType, Map<String, IStageElement>> elementMaps = new HashMap<>();
 
     @Override
     public void enter(IStageElement stageElement, int x, int y) {

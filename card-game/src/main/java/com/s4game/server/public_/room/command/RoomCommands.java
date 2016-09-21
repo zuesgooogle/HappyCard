@@ -1,4 +1,4 @@
-package com.s4game.server.bus.room.command;
+package com.s4game.server.public_.room.command;
 /**
 * @Author zeusgooogle@gmail.com
 * @sine   2016年9月17日 下午12:04:28 

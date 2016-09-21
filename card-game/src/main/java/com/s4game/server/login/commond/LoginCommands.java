@@ -9,9 +9,12 @@ package com.s4game.server.login.commond;
 
 public class LoginCommands {
 
-	public static final String LOGIN_IN = "1001";
+    /**
+     * find or create role
+     */
+	public static final String IN = "1001";
 	
-	public static final String LOGIN_OUT = "1002";
+	public static final String LOGIN_IN = "1002";
 	
 	
 }

@@ -9,7 +9,7 @@
 
 	<bean id="lockManager" class="com.s4game.core.sync.LockManager"></bean>
 	
-	<!-- 
+    <!-- 
 	<bean id="publicSync" class="com.s4game.server.public_.sync.PublicSyncInterceptor"></bean>
 	
 	<aop:config>
@@ -18,6 +18,6 @@
 
         <aop:advisor pointcut-ref="publicPoint" advice-ref="publicSync" />
     </aop:config>
-	 -->
+     -->
 	
 </beans>

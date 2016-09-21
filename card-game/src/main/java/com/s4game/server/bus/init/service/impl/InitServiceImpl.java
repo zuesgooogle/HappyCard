@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import com.s4game.core.data.accessor.cache.manager.CacheManager;
 import com.s4game.core.event.IEventService;
 import com.s4game.server.bus.init.event.publish.RoleLoginEvent;
-import com.s4game.server.bus.init.event.publish.RoleLogoutEvent;
 import com.s4game.server.bus.init.service.InitService;
 import com.s4game.server.bus.role.service.IUserRoleService;
 import com.s4game.server.bus.share.service.IRoleStateService;
@@ -50,8 +49,6 @@ public class InitServiceImpl implements InitService {
 
 	@Override
 	public void roleOut(String roleId) {
-        eventService.publish(new RoleLogoutEvent(roleId, ""));
-	    
 		if (this.usecache) {
 			this.roleCacheManager.freezeRoleCache(roleId);
 		}

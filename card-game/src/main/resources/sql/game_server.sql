@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2016-09-18 16:01:54
+Date: 2016-09-21 16:43:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -154,6 +154,23 @@ CREATE TABLE `role_stage` (
   `copy_info` varchar(255) DEFAULT NULL,
   `log_update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for room
+-- ----------------------------
+DROP TABLE IF EXISTS `room`;
+CREATE TABLE `room` (
+  `id` bigint(20) NOT NULL,
+  `user_role_id` varchar(36) NOT NULL COMMENT '创建者',
+  `status` smallint(6) NOT NULL COMMENT '房间状态',
+  `max_round` smallint(6) NOT NULL COMMENT '最大回合',
+  `cur_round` smallint(6) NOT NULL COMMENT '当前回合',
+  `serial` smallint(6) NOT NULL COMMENT '是否连中',
+  `win` smallint(6) NOT NULL COMMENT '是否强制胡牌',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `log_update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

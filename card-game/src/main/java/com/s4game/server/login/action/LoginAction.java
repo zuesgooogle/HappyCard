@@ -8,17 +8,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.s4game.core.action.annotation.ActionMapping;
 import com.s4game.core.action.annotation.ActionWorker;
 import com.s4game.core.message.Message;
-import com.s4game.server.bus.init.export.InitExportService;
 import com.s4game.server.bus.role.entity.UserRole;
-import com.s4game.server.io.IoConstants;
-import com.s4game.server.io.global.ChannelManager;
 import com.s4game.server.login.commond.LoginCommands;
 import com.s4game.server.login.output.InOutput;
 import com.s4game.server.login.service.ILoginService;
 import com.s4game.server.public_.swap.PublicMsgSender;
-import com.s4game.server.utils.ChannelAttributeUtil;
-
-import io.netty.channel.Channel;
 
 /**
  *
@@ -37,13 +31,7 @@ public class LoginAction {
     @Autowired
     private ILoginService loginService;
 
-    @Autowired
-    private InitExportService initExportService;
-
-    @Autowired
-    private ChannelManager channelManager;
-
-    @ActionMapping(mapping = LoginCommands.LOGIN_IN)
+    @ActionMapping(mapping = LoginCommands.IN)
     public void in(Message message) {
         LOG.info(message.toString());
 
@@ -60,18 +48,6 @@ public class LoginAction {
         UserRole userRole = loginService.in(userId, serverId, name, face, timestamp, sign);
         msgSender.send2OneBySessionId(message.getCommand(), userRole.getId(),
                 message.getSessionId(), InOutput.success(userRole));
-
-        // bind channel
-        Channel channel = channelManager.getSessions().get(message.getSessionId());
-        channelManager.addChannel(userRole.getId(), channel);
-        ChannelAttributeUtil.attr(channel, IoConstants.ROLE_KEY, userRole.getId());
-
-        initExportService.roleIn(userRole.getId(), message.getIp());
     }
 
-    @ActionMapping(mapping = LoginCommands.LOGIN_OUT)
-    public void out(Message message) {
-        String roleId = message.getRoleId();
-        initExportService.roleOut(roleId);
-    }
 }

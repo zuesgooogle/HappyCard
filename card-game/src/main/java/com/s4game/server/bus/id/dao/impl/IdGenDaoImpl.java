@@ -11,7 +11,6 @@ import com.s4game.server.bus.id.entity.IdGen;
  * @sine   2015年5月25日 下午9:20:46 
  *
  */
-@SuppressWarnings("unchecked")
 @Component
 public class IdGenDaoImpl extends AbsDao<IdGen> implements IIdGenDao {
 

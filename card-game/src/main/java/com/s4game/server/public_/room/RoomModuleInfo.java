@@ -1,4 +1,4 @@
-package com.s4game.server.bus.room;
+package com.s4game.server.public_.room;
 
 /**
  * @Author zeusgooogle@gmail.com

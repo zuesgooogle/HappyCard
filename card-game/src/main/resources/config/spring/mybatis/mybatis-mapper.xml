@@ -7,6 +7,8 @@
         <mapper resource="com/s4game/server/bus/room/entity/mapper/RoleRoom.xml" />
         <mapper resource="com/s4game/server/stage/entity/mapper/RoleStage.xml" />
 
+        <mapper resource="com/s4game/server/public_/room/entity/mapper/Room.xml" />
+
 		<mapper resource="com/s4game/server/bus/server/entity/mapper/ServerInfo.xml" />
 		<mapper resource="com/s4game/server/bus/id/entity/mapper/IdGen.xml" />
 

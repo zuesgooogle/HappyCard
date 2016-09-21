@@ -13,6 +13,7 @@ import com.s4game.server.io.IoConstants;
 import com.s4game.server.io.global.ChannelManager;
 import com.s4game.server.io.swap.IoMsgSender;
 import com.s4game.server.login.commond.LoginCommands;
+import com.s4game.server.public_.nodecontrol.command.NodeControlCommands;
 import com.s4game.server.utils.ChannelAttributeUtil;
 
 import io.netty.channel.ChannelHandler.Sharable;
@@ -57,19 +58,27 @@ public class MessageHandler extends SimpleChannelInboundHandler<WebSocketFrame> 
             JSONObject json = JSON.parseObject(request);
             String command = json.getString("cmd");
             
-            String userId = null;
-            
             String sessionId = ChannelAttributeUtil.attr(ctx.channel(), IoConstants.SESSION_KEY);
             switch(command) {
-    		case LoginCommands.LOGIN_IN:
-    		    userId = json.getString("userId");
+    		case LoginCommands.IN:
+    		    String userId = json.getString("userId");
+    		    ChannelAttributeUtil.attr(ctx.channel(), IoConstants.USER_KEY, userId);
     		    
     		    channelManager.addChannel(sessionId, ctx.channel());
     		    break;
+    		case LoginCommands.LOGIN_IN:
+    		    command = NodeControlCommands.ROLE_IN;
+
+    		    String roleId = json.getString("roleId");
+    		    ChannelAttributeUtil.attr(ctx.channel(), IoConstants.ROLE_KEY, roleId);
+    		    
+    		    channelManager.addChannel(roleId, ctx.channel());
+    		    break;
             }
             
-            String roleId = ChannelAttributeUtil.attr(ctx.channel(), IoConstants.ROLE_KEY);
     		String ip = ChannelAttributeUtil.attr(ctx.channel(), IoConstants.IP_KEY);
+    		String roleId = ChannelAttributeUtil.attr(ctx.channel(), IoConstants.ROLE_KEY);
+    		String userId = ChannelAttributeUtil.attr(ctx.channel(), IoConstants.USER_KEY);
     		
     		Message message = new Message(command, json, FromType.CLIENT, DestType.BUS, roleId, userId, sessionId, ip);
     		msgSender.swap(message);
@@ -99,7 +108,7 @@ public class MessageHandler extends SimpleChannelInboundHandler<WebSocketFrame> 
 	    String roleId = ChannelAttributeUtil.attr(ctx.channel(), IoConstants.ROLE_KEY);
 	    
 	    JSONObject json = new JSONObject();
-	    json.put("cmd", LoginCommands.LOGIN_OUT);
+	    json.put("cmd", NodeControlCommands.ROLE_OUT);
 	    json.put("roleId", roleId);
 	    
 	    channelRead0(ctx, new TextWebSocketFrame(json.toJSONString()));

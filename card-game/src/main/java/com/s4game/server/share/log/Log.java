@@ -19,7 +19,12 @@ public class Log {
     
     
     
-    private static Logger LOG = LoggerFactory.getLogger(ERROR_LOGGER);
+    public static Logger LOG = LoggerFactory.getLogger(ERROR_LOGGER);
+    
+    public static Logger PUBLIC = LoggerFactory.getLogger("public");
+    
+    public static Logger ROOM = LoggerFactory.getLogger("room");
+    
     
     public static void error(String message, Object... params) {
         LOG.error(message, params);

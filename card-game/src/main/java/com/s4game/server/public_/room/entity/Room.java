@@ -1,4 +1,4 @@
-package com.s4game.server.bus.room.entity;
+package com.s4game.server.public_.room.entity;
 
 import java.sql.Timestamp;
 
@@ -10,25 +10,32 @@ import com.s4game.core.data.IEntity;
  * @sine 2016年9月17日 下午12:12:02
  *
  */
-public class RoleRoom extends AbsVersion implements IEntity {
+public class Room extends AbsVersion implements IEntity {
 
     /**
      * 
      */
     private static final long serialVersionUID = 5764691377281646396L;
 
+    private long id;
+
     private String userRoleId;
 
     /**
-     * 房间号
+     * 房间状态
      */
-    private int number;
+    private int status;
 
     /**
      * 总回合数
      */
-    private int round;
+    private int maxRound;
 
+    /**
+     * 当前回合 <= round
+     */
+    private int curRound;
+    
     /**
      * 是否连中
      */
@@ -39,17 +46,17 @@ public class RoleRoom extends AbsVersion implements IEntity {
      */
     private boolean win;
 
-    /**
-     * 房间状态
-     */
-    private int status;
-    
-    /**
-     * 当前回合 <= round
-     */
-    private int curRound;
+    private Timestamp createTime;
     
     private Timestamp logUpdateTime;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getUserRoleId() {
         return userRoleId;
@@ -59,20 +66,12 @@ public class RoleRoom extends AbsVersion implements IEntity {
         this.userRoleId = userRoleId;
     }
 
-    public int getNumber() {
-        return number;
+    public int getMaxRound() {
+        return maxRound;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public int getRound() {
-        return round;
-    }
-
-    public void setRound(int round) {
-        this.round = round;
+    public void setMaxRound(int maxRound) {
+        this.maxRound = maxRound;
     }
 
     public boolean isSerial() {
@@ -107,6 +106,14 @@ public class RoleRoom extends AbsVersion implements IEntity {
         this.curRound = curRound;
     }
 
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
     public Timestamp getLogUpdateTime() {
         return logUpdateTime;
     }
@@ -117,25 +124,29 @@ public class RoleRoom extends AbsVersion implements IEntity {
 
     @Override
     public String getPirmaryKeyName() {
-        return "userRoleId";
+        return "id";
     }
 
     @Override
     public Object getPrimaryKeyValue() {
-        return getUserRoleId();
+        return getId();
     }
 
     @Override
     public IEntity copy() {
-        RoleRoom room = new RoleRoom();
+        Room room = new Room();
+        room.setId(getId());
         room.setUserRoleId(getUserRoleId());
-        room.setNumber(getNumber());
-        room.setRound(getRound());
+        room.setStatus(getStatus());
+        room.setMaxRound(getMaxRound());
+        room.setCurRound(getCurRound());
         room.setSerial(isSerial());
         room.setWin(isWin());
         room.setStatus(getStatus());
-        room.setCurRound(getCurRound());
-
+        
+        room.setCreateTime(getCreateTime());
+        room.setLogUpdateTime(getLogUpdateTime());
+        
         return room;
     }
 

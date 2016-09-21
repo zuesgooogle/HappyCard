@@ -11,7 +11,6 @@ import com.s4game.core.data.accessor.AccessType;
  * @date 2014-10-1 下午09:26:20
  */
 
-@SuppressWarnings("unchecked")
 public abstract class AbsDao<T extends IEntity> extends AbsBaseDao<T> implements IDaoContext, IParamDaoOperation<T>, IAdvancedDaoOperation<T> {
 
     public AbsDao() {

@@ -1,4 +1,4 @@
-package com.s4game.server.bus.room.action;
+package com.s4game.server.public_.room.action;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,11 +8,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.s4game.core.action.annotation.ActionMapping;
 import com.s4game.core.action.annotation.ActionWorker;
 import com.s4game.core.message.Message;
-import com.s4game.server.bus.room.command.RoomCommands;
-import com.s4game.server.bus.room.entity.RoleRoom;
-import com.s4game.server.bus.room.output.RoomOutput;
-import com.s4game.server.bus.room.service.IRoleRoomService;
-import com.s4game.server.bus.swap.BusMsgSender;
+import com.s4game.server.public_.room.command.RoomCommands;
+import com.s4game.server.public_.room.entity.Room;
+import com.s4game.server.public_.room.output.RoomOutput;
+import com.s4game.server.public_.room.service.IRoomService;
+import com.s4game.server.public_.swap.PublicMsgSender;
 
 /**
  * @Author zeusgooogle@gmail.com
@@ -25,10 +25,10 @@ public class RoomAction {
     private Logger LOG = LoggerFactory.getLogger(getClass());
     
     @Autowired
-    private BusMsgSender msgSender;
+    private PublicMsgSender msgSender;
     
     @Autowired
-    private IRoleRoomService roleRoomService;
+    private IRoomService roomService;
 
     @ActionMapping(mapping = RoomCommands.CREATE_ROOM)
     public void create(Message message) {
@@ -41,7 +41,7 @@ public class RoomAction {
         boolean serial = data.getBooleanValue("serial");
         boolean win = data.getBooleanValue("win");
         
-        RoleRoom room = roleRoomService.createRoom(roleId, round, serial, win);
+        Room room = roomService.createRoom(roleId, round, serial, win);
         msgSender.send2One(message.getCommand(), roleId, RoomOutput.room(room));
     }
     
@@ -52,6 +52,6 @@ public class RoomAction {
         String roleId = message.getRoleId();
         int roomId = data.getIntValue("roomId");
         
-        roleRoomService.enterRoom(roleId, roomId + "");
+        //roomService.enterRoom(roleId, roomId + "");
     }
 }

@@ -6,6 +6,8 @@ package com.s4game.server.io;
  */
 public class IoConstants {
 
+    public static final String USER_KEY = "user_key";
+    
 	public static final String ROLE_KEY = "role_key";
 	
 	public static final String IP_KEY = "ip_key";
