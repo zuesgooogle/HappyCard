@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.fastjson.JSONObject;
 import com.s4game.core.action.annotation.ActionMapping;
 import com.s4game.core.action.annotation.ActionWorker;
 import com.s4game.server.io.global.ChannelManager;
@@ -47,7 +48,10 @@ public class IoMsgOutAction {
             }
 
             if (null != channel) {
-                channel.writeAndFlush( new TextWebSocketFrame(message.toData()));
+                JSONObject data = (JSONObject) message.getData();
+                data.put("cmd", message.getRealCommand());
+                
+                channel.writeAndFlush( new TextWebSocketFrame(data.toJSONString()));
             }
 
             break;
