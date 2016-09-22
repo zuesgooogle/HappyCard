@@ -1,8 +1,6 @@
 package com.s4game.server.public_.room.service.impl;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,9 +31,8 @@ import com.s4game.server.public_.room.output.RoomOutput;
 import com.s4game.server.public_.room.service.IRoomService;
 import com.s4game.server.public_.swap.PublicMsgSender;
 import com.s4game.server.share.log.Log;
-import com.s4game.server.stage.model.core.stage.ElementType;
-import com.s4game.server.stage.model.element.role.Role;
 import com.s4game.server.stage.room.RoomStage;
+import com.s4game.server.stage.service.IRoleBehaviourService;
 import com.s4game.server.stage.service.IStageService;
 import com.s4game.server.stage.swap.StageMsgSender;
 
@@ -52,6 +49,9 @@ public class RoomServiceImpl implements IRoomService {
     
     @Autowired
     private IUserRoleService roleService;
+    
+    @Autowired
+    private IRoleBehaviourService roleBehaviourService;
     
     @Autowired
     private DataContainer dataContainer;
@@ -159,13 +159,8 @@ public class RoomServiceImpl implements IRoomService {
         businessData.getMembers().add(memberData);
         
         //广播给房间玩家上线
-        Collection<Role> roles = stage.getElementsByType(ElementType.ROLE);
-        List<String> roleIds = new ArrayList<>(roles.size());
-        for (Role r : roles) {
-            roleIds.add(r.getId());
-        }
-        
-        stageMsgSender.sned2Many(RoomCommands.JOIN_ROOM, roleId, stageId, roleIds.toArray(new String[0]), RoomOutput.join(memberData));
+        String[] stageRoleId = roleBehaviourService.getStageRoleId(stageId);
+        stageMsgSender.sned2Many(RoomCommands.JOIN_ROOM, roleId, stageId, stageRoleId, RoomOutput.join(memberData));
     }
     
 }
