@@ -34,7 +34,7 @@ public interface IStageService {
      */
     public void roleEnterStage(String stageId, String roleId, String mapId, int x, int y);
 
-    public IStage getStage(String stageId);
+    public <S extends IStage> S getStage(String stageId);
     
     public void removeStage(String stageId);
     

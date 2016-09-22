@@ -23,4 +23,9 @@ public class EventConstants {
      * 角色退出
      */
     public static final String ROLE_LOGOUT = "role_logout";
+    
+    /**
+     * 角色进入场景
+     */
+    public static final String ROLE_ENTER_STAGE = "stage_role_enter";
 }

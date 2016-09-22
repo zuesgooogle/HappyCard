@@ -1,4 +1,4 @@
-package com.s4game.server.bus.room.entity;
+package com.s4game.server.public_.room.model;
 
 public class RoomStatus {
 

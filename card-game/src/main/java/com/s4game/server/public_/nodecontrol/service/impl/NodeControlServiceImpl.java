@@ -20,12 +20,16 @@ public class NodeControlServiceImpl implements INodeControlService {
     
     @Autowired
     private IPublicRoleStateService publicRoleStateService;
+    
     @Autowired
     private InitExportService initExportService;
+    
     @Autowired
     private IEventService eventService;
+    
     @Autowired
     private IUserRoleService roleService;
+    
     @Autowired
     @Qualifier("publicCacheManager")
     private CacheManager publicCacheManager;

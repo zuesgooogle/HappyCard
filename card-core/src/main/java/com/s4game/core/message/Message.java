@@ -33,6 +33,7 @@ public class Message {
         this.token = message.getToken();
         this.ip = message.getIp();
 
+        this.roleIds =  message.getRoleIds();
         this.route = message.getRoute();
         this.userId = message.getUserId();
         this.sessionId = message.getSessionId();
@@ -113,6 +114,14 @@ public class Message {
         this.roleId = roleId;
     }
 
+    public String[] getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(String[] roleIds) {
+        this.roleIds = roleIds;
+    }
+
     public String getUserId() {
         return userId;
     }
@@ -159,6 +168,7 @@ public class Message {
         json.put("data", data);
         json.put("route", route);
         json.put("userId", userId);
+        json.put("roleIds", roleIds);
         json.put("sessionId", sessionId);
         json.put("token", token);
         json.put("ip", ip);
@@ -206,6 +216,11 @@ public class Message {
      */
     private String userId;
 
+    /**
+     * 广播角色ID
+     */
+    private String[] roleIds;
+    
     /**
      * 场景Id
      */

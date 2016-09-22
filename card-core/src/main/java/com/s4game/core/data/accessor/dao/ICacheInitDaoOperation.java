@@ -22,7 +22,7 @@ public interface ICacheInitDaoOperation<T extends IEntity> {
 
     public List<T> cacheLoadAll(String id);
 
-    public List<T> cacheLoadAll(String id, IQueryFilter queryFilter);
+    public List<T> cacheLoadAll(String id, IQueryFilter<T> queryFilter);
 
     public Object cacheInsert(T t, String id);
 

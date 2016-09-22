@@ -1,5 +1,7 @@
 package com.s4game.server.bus.stagecontroll.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import com.s4game.server.bus.stagecontroll.position.RoleNormalPosition;
 import com.s4game.server.bus.stagecontroll.position.StageCopyPosition;
 import com.s4game.server.bus.stagecontroll.service.IStageControllService;
 import com.s4game.server.bus.swap.BusMsgSender;
+import com.s4game.server.public_.room.entity.Room;
+import com.s4game.server.public_.room.service.IRoomService;
 import com.s4game.server.stage.entity.RoleStage;
 import com.s4game.server.stage.export.RoleStageWrapper;
 import com.s4game.server.stage.model.core.stage.Point;
@@ -45,6 +49,9 @@ public class StageControllServiceImpl implements IStageControllService {
     @Autowired
     private IRoleStageService roleStageService;
 
+    @Autowired
+    private IRoomService roomService;
+    
     @Autowired
     private DataContainer dataContainer;
 
@@ -243,7 +250,11 @@ public class StageControllServiceImpl implements IStageControllService {
 
     @Override
     public void serverStartInitStage() {
-
+        List<Room> rooms = roomService.loadAll();
+        for (Room room : rooms) {
+            String id = String.valueOf(room.getId());
+            stageService.checkAndCreateStage(id, id);
+        }
     }
 
     @Override

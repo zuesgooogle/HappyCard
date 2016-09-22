@@ -16,7 +16,7 @@ public class StageCopyPosition extends AbsRolePosition {
     private Object[] additionalData;
     
     public StageCopyPosition(String roleId, String mapId, int mapType, int x, int y, Object[] additionalData) {
-        this(roleId, mapId, mapType, x, y, roleId + "_" + mapId, additionalData);
+        this(roleId, mapId, mapType, x, y, mapId, additionalData);
     }
     
     public StageCopyPosition(String roleId, String mapId, int mapType, int x, int y, String stageId, Object[] additionalData) {

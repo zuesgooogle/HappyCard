@@ -39,13 +39,16 @@ public class StageServiceImpl implements IStageService {
     @Autowired
     private RoleFactory roleFactory;
     
+    @Autowired
+    private RoomStageFactory stageFactory;
+    
     private ConcurrentMap<String, IStage> stageMap = new ConcurrentHashMap<String, IStage>();
     
     @Override
     public boolean checkAndCreateStage(String stageId, String mapId) {
         IStage stage = stageMap.get(stageId);
         if( null == stage ) {
-            stage = RoomStageFactory.create(stageId, mapId);
+            stage = stageFactory.create(stageId, mapId);
             stageMap.put(stageId, stage);
             
             eventService.publish(new StageCreateEvent(mapId, stageId));
@@ -54,9 +57,10 @@ public class StageServiceImpl implements IStageService {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public IStage getStage(String stageId) {
-        return stageMap.get(stageId);
+    public <S extends IStage> S getStage(String stageId) {
+        return (S) stageMap.get(stageId);
     }
 
     @Override
@@ -130,13 +134,13 @@ public class StageServiceImpl implements IStageService {
         
         //已经在场景内
         if( role != null ) {
-            stageMsgSender.sned2One(StageControllCommands.CHANGE_STAGE, roleId, stageId, new Object[]{1, stageId, mapId});
+            //stageMsgSender.sned2One(StageControllCommands.CHANGE_STAGE, roleId, stageId, new Object[]{1, stageId, mapId});
             return;
         }
         
         //填充，初始化 role 数据
         role = roleFactory.create(roleId, stage);
-        stageMsgSender.sned2One(StageControllCommands.CHANGE_STAGE, roleId, stageId, new Object[]{1, stageId, mapId});
+        //stageMsgSender.sned2One(StageControllCommands.CHANGE_STAGE, roleId, stageId, new Object[]{1, stageId, mapId});
         
         stage.enter(role, x, y);
         eventService.publish(new RoleEnterStageEvent(stageId, mapId, roleId));

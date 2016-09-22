@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.s4game.server.bus.card.CardConstants;
 import com.s4game.server.bus.card.service.ICardService;
-import com.s4game.server.public_.model.card.CardData;
+import com.s4game.server.public_.room.model.CardData;
 import com.s4game.server.stage.model.core.stage.ElementType;
 import com.s4game.server.stage.model.core.stage.IStage;
 import com.s4game.server.stage.model.element.role.Role;

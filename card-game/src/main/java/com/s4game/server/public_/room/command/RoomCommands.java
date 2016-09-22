@@ -20,4 +20,5 @@ public class RoomCommands {
      * 解散房间
      */
     public static final String DISMISS_ROOM = "2003";
+    
 }

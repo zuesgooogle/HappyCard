@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.s4game.core.message.Message;
 import com.s4game.core.message.Message.DestType;
 import com.s4game.core.message.Message.FromType;
+import com.s4game.server.io.IoConstants;
 import com.s4game.server.message.IMsgDispatcher;
 import com.s4game.server.message.manager.SwapManager;
 
@@ -30,7 +31,17 @@ public class StageMsgSender {
         
         Message message = new Message(command, data, FromType.STAGE, DestType.CLIENT, roleId);
         message.setStageId(stageId);
-        message.setRoute(1);// send one player
+        message.setRoute(IoConstants.SEND_TO_ONE);// send one player
+        
+        swapManager.swap(message);
+    }
+    
+    public void sned2Many(String command, String roleId, String stageId, String[] roleIds, Object data) {
+        Message message = new Message(command, data, FromType.STAGE, DestType.CLIENT, roleId);
+        message.setStageId(stageId);
+        message.setRoleIds(roleIds);
+        
+        message.setRoute(IoConstants.SEND_TO_MANY);
         
         swapManager.swap(message);
     }

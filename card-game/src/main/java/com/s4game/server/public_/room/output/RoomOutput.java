@@ -2,6 +2,7 @@ package com.s4game.server.public_.room.output;
 
 import com.alibaba.fastjson.JSONObject;
 import com.s4game.server.public_.room.entity.Room;
+import com.s4game.server.public_.room.model.RoomMemberData;
 
 /**
 * @Author zeusgooogle@gmail.com
@@ -23,4 +24,13 @@ public class RoomOutput {
         return json;
     }
     
+    public static JSONObject join(RoomMemberData member) {
+        JSONObject json = new JSONObject();
+        json.put("roleId", member.getRoleId());
+        json.put("name", member.getName());
+        json.put("face", member.getFace());
+        json.put("ready", member.isReady());
+        
+        return json;
+    }
 }

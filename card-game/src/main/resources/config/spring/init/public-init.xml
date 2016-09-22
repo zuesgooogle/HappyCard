@@ -18,7 +18,7 @@
 			<map>
 				<entry key="login" value="6"></entry>
 				<entry key="node-control" value="6"></entry>
-				<entry key="guild" value="1"></entry>
+				<entry key="room" value="1"></entry>
 				<entry key="public" value="3"></entry>
 				<entry key="system" value="1"></entry>
 			</map>

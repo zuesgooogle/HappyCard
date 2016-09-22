@@ -1,6 +1,7 @@
 package com.s4game.server.stage.event.publish;
 
 import com.s4game.core.event.IEvent;
+import com.s4game.server.share.event.EventConstants;
 
 public class RoleEnterStageEvent implements IEvent {
     
@@ -14,7 +15,7 @@ public class RoleEnterStageEvent implements IEvent {
     }
 
     public String getType() {
-        return "stage_role_enter";
+        return EventConstants.ROLE_ENTER_STAGE;
     }
 
     public Object getData() {
