@@ -50,8 +50,8 @@ public class RoomAction {
         JSONObject data = (JSONObject) message.getData();
         
         String roleId = message.getRoleId();
-        int roomId = data.getIntValue("roomId");
+        String roomId = data.getString("roomId");
         
-        //roomService.enterRoom(roleId, roomId + "");
+        roomService.enterRoom(roleId, roomId);
     }
 }

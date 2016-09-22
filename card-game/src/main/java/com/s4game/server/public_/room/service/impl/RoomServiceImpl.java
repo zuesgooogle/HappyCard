@@ -78,7 +78,7 @@ public class RoomServiceImpl implements IRoomService {
         StageCopyPosition copyPosition = new StageCopyPosition(roleId, roomId, MapType.ROOM, 0, 0, new Object[]{});
         roleState.setReadyForPosition(copyPosition);
         
-        //publicMsgSender.send2BusInner(StageControllCommands.CHANGE_STAGE, roleId, new Object[]{});
+        publicMsgSender.send2GsStageControl(StageControllCommands.CHANGE_STAGE, roleId, new Object[]{});
     }
     
 }

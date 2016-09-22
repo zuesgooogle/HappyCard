@@ -97,6 +97,9 @@ public class SwapManager {
         case BUS:
             this.gsDispatcher.in(message);
             break;
+        case STAGE_CONTROL:
+            this.gsDispatcher.in(message);
+            break;
         case PUBLIC:
             toPublic(message);
             break;

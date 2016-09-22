@@ -49,15 +49,12 @@ public class PublicMsgSender {
     
     public void send2GsStageControl(String command, String roleId, Object data) {
         Message message = new Message(command, data, FromType.BUS, DestType.STAGE_CONTROL, roleId);
-        message.setRoute(1); // send to one player
         
         swapManager.swap(message);
     }
     
     public void send2PublicInner(String command, String roleId, Object data) {
-        //Object[] message = new Object[] { command, data, DestType.STAGE_CONTROL.getValue(), FromType.BUS.getValue(), 1, null, null, userId, 0, null };
-        
-        Message message = new Message(command, data, FromType.BUS, DestType.STAGE_CONTROL, roleId);
+        Message message = new Message(command, data, FromType.BUS, DestType.PUBLIC, roleId);
         
         publicDispatcher.in(message);
     }
