@@ -46,12 +46,12 @@ public class RoomBusinessData {
     /**
      * 初始化一副牌数据
      */
-    private List<CardData> initCards;
+    private List<CardData> initCards = new ArrayList<>();
     
     /**
      * 剩余牌列表
      */
-    private List<CardData> remainCards;
+    private List<CardData> remainCards = new ArrayList<>();
     
     public long getRoomId() {
         return roomId;

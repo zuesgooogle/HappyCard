@@ -1,5 +1,6 @@
 package com.s4game.server.public_.room.output;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.s4game.server.public_.room.entity.Room;
 import com.s4game.server.public_.room.model.RoomMemberData;
@@ -32,5 +33,9 @@ public class RoomOutput {
         json.put("ready", member.isReady());
         
         return json;
+    }
+    
+    public static JSONObject memberData(RoomMemberData member) {
+        return (JSONObject) JSON.toJSON(member);
     }
 }

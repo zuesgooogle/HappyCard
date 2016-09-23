@@ -28,6 +28,7 @@ import com.s4game.server.public_.room.model.RoomBusinessData;
 import com.s4game.server.public_.room.model.RoomMemberData;
 import com.s4game.server.public_.room.model.RoomStatus;
 import com.s4game.server.public_.room.output.RoomOutput;
+import com.s4game.server.public_.room.service.ICardService;
 import com.s4game.server.public_.room.service.IRoomService;
 import com.s4game.server.public_.swap.PublicMsgSender;
 import com.s4game.server.share.log.Log;
@@ -52,6 +53,9 @@ public class RoomServiceImpl implements IRoomService {
     
     @Autowired
     private IRoleBehaviourService roleBehaviourService;
+    
+    @Autowired
+    private ICardService cardService;
     
     @Autowired
     private DataContainer dataContainer;
@@ -92,23 +96,25 @@ public class RoomServiceImpl implements IRoomService {
     @Override
     public Room createRoom(String roleId, int round, boolean serial, boolean win) {
         Room room = loadByRoleId(roleId);
-        if (room != null) {
-            return room;
+        if (room == null) {
+            room = new Room();
+            room.setUserRoleId(roleId);
+            room.setStatus(RoomStatus.PREPARE);
+            room.setId((int) (System.currentTimeMillis() / 1000));
+            room.setMaxRound(round);
+            room.setSerial(serial);
+            room.setWin(win);
+            
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            room.setCreateTime(now);
+            room.setLogUpdateTime(now);
+            
+            getDao().insert(room, GlobalIdentity.get(), AccessType.getDirectDbType());
         }
         
-        room = new Room();
-        room.setUserRoleId(roleId);
-        room.setStatus(RoomStatus.PREPARE);
-        room.setId((int) (System.currentTimeMillis() / 1000));
-        room.setMaxRound(round);
-        room.setSerial(serial);
-        room.setWin(win);
+        publicMsgSender.send2One(RoomCommands.CREATE_ROOM, roleId, RoomOutput.room(room));
         
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        room.setCreateTime(now);
-        room.setLogUpdateTime(now);
-        
-        getDao().insert(room, GlobalIdentity.get(), AccessType.getDirectDbType());
+        enterRoom(roleId, String.valueOf(room.getId()));
         
         return room;
     }
@@ -154,13 +160,33 @@ public class RoomServiceImpl implements IRoomService {
         RoomMemberData memberData = businessData.findMemberData(roleId);
         if (memberData == null) {
             memberData = new RoomMemberData(role);
+            businessData.getMembers().add(memberData);
         }
         memberData.setReady(true);
-        businessData.getMembers().add(memberData);
         
         //广播给房间玩家上线
         String[] stageRoleId = roleBehaviourService.getStageRoleId(stageId);
-        stageMsgSender.sned2Many(RoomCommands.JOIN_ROOM, roleId, stageId, stageRoleId, RoomOutput.join(memberData));
+        stageMsgSender.send2Many(RoomCommands.JOIN_ROOM, roleId, stageId, stageRoleId, RoomOutput.join(memberData));
+        
+        // 开始游戏
+        if (businessData.getMembers().size() >= RoomConstants.MEMBER_SIZE) {
+            start(stage);
+        }
+        
+    }
+    
+    private void start(RoomStage stage) {
+        RoomBusinessData businessData = stage.getRoomBusinessData();
+        
+        //房间设置为运行状态
+        businessData.setStatus(RoomStatus.RUNNING);
+        
+        //发牌
+        cardService.deal(stage);
+        
+        for (RoomMemberData member : businessData.getMembers()) {
+            stageMsgSender.send2One(RoomCommands.START_GAME, member.getRoleId(), stage.getId(), RoomOutput.memberData(member));
+        }
     }
     
 }

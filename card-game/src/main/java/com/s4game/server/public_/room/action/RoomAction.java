@@ -41,8 +41,8 @@ public class RoomAction {
         boolean serial = data.getBooleanValue("serial");
         boolean win = data.getBooleanValue("win");
         
-        Room room = roomService.createRoom(roleId, round, serial, win);
-        msgSender.send2One(message.getCommand(), roleId, RoomOutput.room(room));
+        roomService.createRoom(roleId, round, serial, win);
+        
     }
     
     @ActionMapping(mapping = RoomCommands.JOIN_ROOM)

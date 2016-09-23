@@ -26,7 +26,7 @@ public class StageMsgSender {
     @Resource
     private IMsgDispatcher stageDispatcher; 
     
-    public void sned2One(String command, String roleId, String stageId, Object data) {
+    public void send2One(String command, String roleId, String stageId, Object data) {
         //Object[] message = new Object[]{command, data, DestType.CLIENT.getValue(), FromType.STAGE.getValue(), 1, null, roleId, stageId, 0, null};
         
         Message message = new Message(command, data, FromType.STAGE, DestType.CLIENT, roleId);
@@ -36,7 +36,7 @@ public class StageMsgSender {
         swapManager.swap(message);
     }
     
-    public void sned2Many(String command, String roleId, String stageId, String[] roleIds, Object data) {
+    public void send2Many(String command, String roleId, String stageId, String[] roleIds, Object data) {
         Message message = new Message(command, data, FromType.STAGE, DestType.CLIENT, roleId);
         message.setStageId(stageId);
         message.setRoleIds(roleIds);

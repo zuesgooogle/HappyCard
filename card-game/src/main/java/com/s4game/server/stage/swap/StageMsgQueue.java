@@ -89,7 +89,7 @@ public class StageMsgQueue {
         }
 
         public void flush() {
-            stageMsgSender.sned2One(command, roleId, null, data);
+            stageMsgSender.send2One(command, roleId, null, data);
         }
     }
 
