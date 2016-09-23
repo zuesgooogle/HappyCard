@@ -10,8 +10,10 @@ import javax.annotation.Resource;
 import com.s4game.core.action.annotation.ActionMapping;
 import com.s4game.core.action.annotation.ActionWorker;
 import com.s4game.core.message.Message;
+import com.s4game.server.bus.stagecontroll.output.StageControllOutput;
 import com.s4game.server.bus.stagecontroll.service.IStageControllService;
 import com.s4game.server.bus.swap.BusMsgSender;
+import com.s4game.server.login.commond.LoginCommands;
 
 /**
  *
@@ -32,8 +34,8 @@ public class StageControllAction {
     public void login(Message message) {
         String roleId = message.getRoleId();
         
-        Object result = stageControllService.login(roleId);
-        //busMsgSender.send2One(LOGIN, roleId, result);
+        stageControllService.login(roleId);
+        busMsgSender.send2One(LoginCommands.LOGIN_IN, roleId, StageControllOutput.login(roleId));
     }
     
 //    @ActionMapping(mapping = APPLY_CHANGE_STAGE)

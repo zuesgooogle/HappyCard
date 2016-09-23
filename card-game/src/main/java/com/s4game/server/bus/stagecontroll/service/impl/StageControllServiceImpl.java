@@ -70,8 +70,7 @@ public class StageControllServiceImpl implements IStageControllService {
         Object[] chargeInfo = new Object[] { 1000, 50 };
         int gmState = 0;
 
-        return StageControllOutput.login(roleWrapper, roleStageWrapper, vipLevel, chargeInfo,
-                gmState);
+        return StageControllOutput.login(roleId);
     }
 
     /**
