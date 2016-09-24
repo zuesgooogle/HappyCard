@@ -19,6 +19,8 @@ import com.s4game.server.bus.share.constants.BusShareConstant;
 import com.s4game.server.bus.stagecontroll.RoleState;
 import com.s4game.server.bus.stagecontroll.command.StageControllCommands;
 import com.s4game.server.bus.stagecontroll.position.StageCopyPosition;
+import com.s4game.server.public_.card.command.CardCommands;
+import com.s4game.server.public_.card.service.ICardService;
 import com.s4game.server.public_.room.RoomConstants;
 import com.s4game.server.public_.room.command.RoomCommands;
 import com.s4game.server.public_.room.dao.IRoomDao;
@@ -28,7 +30,6 @@ import com.s4game.server.public_.room.model.RoomBusinessData;
 import com.s4game.server.public_.room.model.RoomMemberData;
 import com.s4game.server.public_.room.model.RoomStatus;
 import com.s4game.server.public_.room.output.RoomOutput;
-import com.s4game.server.public_.room.service.ICardService;
 import com.s4game.server.public_.room.service.IRoomService;
 import com.s4game.server.public_.swap.PublicMsgSender;
 import com.s4game.server.share.log.Log;
@@ -185,7 +186,7 @@ public class RoomServiceImpl implements IRoomService {
         cardService.deal(stage);
         
         for (RoomMemberData member : businessData.getMembers()) {
-            stageMsgSender.send2One(RoomCommands.START_GAME, member.getRoleId(), stage.getId(), RoomOutput.memberData(member));
+            stageMsgSender.send2One(CardCommands.CARD_INIT, member.getRoleId(), stage.getId(), RoomOutput.memberData(member));
         }
     }
     

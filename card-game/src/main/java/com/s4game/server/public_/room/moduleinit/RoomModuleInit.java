@@ -1,4 +1,4 @@
-package com.s4game.server.public_.room.modelinit;
+package com.s4game.server.public_.room.moduleinit;
 
 import static com.s4game.server.public_.room.command.RoomCommands.CREATE_ROOM;
 import static com.s4game.server.public_.room.command.RoomCommands.DISMISS_ROOM;

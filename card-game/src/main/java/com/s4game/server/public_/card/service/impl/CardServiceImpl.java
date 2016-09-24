@@ -1,4 +1,4 @@
-package com.s4game.server.public_.room.service.impl;
+package com.s4game.server.public_.card.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.s4game.server.public_.card.service.ICardService;
 import com.s4game.server.public_.room.RoomConstants;
 import com.s4game.server.public_.room.model.CardData;
 import com.s4game.server.public_.room.model.RoomBusinessData;
 import com.s4game.server.public_.room.model.RoomMemberData;
-import com.s4game.server.public_.room.service.ICardService;
 import com.s4game.server.stage.room.RoomStage;
 import com.s4game.server.utils.MathUtils;
 import com.s4game.server.utils.id.IdUtil;
@@ -99,4 +99,9 @@ public class CardServiceImpl implements ICardService {
     private String nextCardId(String stageId) {
         return IdUtil.nextString(stageId);
     }
+
+	@Override
+	public void play(String roleId, String cardId) {
+		
+	}
 }
