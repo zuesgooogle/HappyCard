@@ -17,7 +17,5 @@ public class RoomConstants {
      */
     public static final int INIT_CARD_SIZE = 14 * 4;
     
-    public static final int[] BIG = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    
-    public static final int[] SMALL = new int[]{-1, -2, -3, -4, -5, -6, -7, -8, -9, -10};
+    public static final int[] CARD_VALUE = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 }

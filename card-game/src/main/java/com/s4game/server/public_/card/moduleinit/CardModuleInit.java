@@ -1,9 +1,13 @@
 package com.s4game.server.public_.card.moduleinit;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component;	
 
+import static com.s4game.server.public_.card.command.CardCommands.*;
+
+import com.s4game.server.public_.card.CardModuleInfo;
 import com.s4game.server.public_.share.PublicModuleInit;
 import com.s4game.server.share.event.EventHandleCommands;
+import com.s4game.server.share.moduleinit.Group;
 
 /**
 *
@@ -21,7 +25,9 @@ public class CardModuleInit extends PublicModuleInit {
 
 	@Override
 	protected InCmd getInCmd() {
-		return null;
+	    String[] cmd = new String[]{CARD_INIT, CARD_PLAY, CARD_ACTION};
+	    
+		return new InCmd(CardModuleInfo.MODULE_NAME, Group.PUBLIC.name, cmd);
 	}
 
 }

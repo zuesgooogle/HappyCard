@@ -6,14 +6,22 @@ public class CardData {
 
     private int value;
 
+    private boolean big;
+
     public CardData() {
 
     }
 
     public CardData(String id, int value) {
+        this(id, value, false);
+    }
+    
+    public CardData(String id, int value, boolean big) {
         this.id = id;
         this.value = value;
+        this.big = big;
     }
+    
 
     public String getId() {
         return id;
@@ -31,9 +39,17 @@ public class CardData {
         this.value = value;
     }
 
+    public boolean isBig() {
+        return big;
+    }
+
+    public void setBig(boolean big) {
+        this.big = big;
+    }
+
     @Override
     public String toString() {
-        return "Card [id=" + id + ", value=" + value + "]";
+        return "CardData [id=" + id + ", value=" + value + ", big=" + big + "]";
     }
 
 }
