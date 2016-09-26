@@ -1,4 +1,4 @@
-package com.s4game.card;
+package com.s4game.hupai;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +17,30 @@ import com.s4game.server.utils.id.IdUtil;
  * @sine 2016年9月24日 下午11:00:49
  *
  */
-public class CardTest {
+public class Hupai3n {
 
-    public static final Logger LOG = LoggerFactory.getLogger(CardTest.class);
+    public static final Logger LOG = LoggerFactory.getLogger(Hupai3n.class);
 
     public static final String stageId = "0";
 
     @Test
-    public void test() {
+    public void performance() {
+        int count = 1000000;
+        
+        long start = System.currentTimeMillis();
+        int i = 0;
+        while(i++ < count) {
+            
+            hupai();
+            
+        }
+        
+        long end = System.currentTimeMillis();
+        LOG.info(" i : {} use time: {}", i, (end - start));
+    }
+    
+    @Test
+    public void hupai() {
         CopyOnWriteArrayList<CardData> cards = new CopyOnWriteArrayList<>();
         
         for (int v : RoomConstants.CARD_VALUE) {
@@ -41,9 +57,8 @@ public class CardTest {
         CopyOnWriteArrayList<CardData> remainCards = new CopyOnWriteArrayList<>();
         // N +- 3, 最多取 5 次
         for(int i = 0; i < 15; i++) {
-            check(cards, remainCards);
+            match123(cards, remainCards);
         }
-        
         
         if (remainCards.isEmpty()) {
             LOG.info("hu pai.");
@@ -59,7 +74,7 @@ public class CardTest {
      * 
      * @param cardMap
      */
-    public void check(CopyOnWriteArrayList<CardData> cards, CopyOnWriteArrayList<CardData> remainCards) {
+    public void match123(CopyOnWriteArrayList<CardData> cards, CopyOnWriteArrayList<CardData> remainCards) {
         if (cards.isEmpty()) {
             return;
         }
@@ -120,6 +135,7 @@ public class CardTest {
         }
         
         if (tmp.size() < values.length) {
+            LOG.info("match failure. cards: {}", tmp);
             return;
         } else {
             LOG.info("match success. cards: {}", tmp);

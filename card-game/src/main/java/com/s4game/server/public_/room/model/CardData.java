@@ -47,6 +47,14 @@ public class CardData {
         this.big = big;
     }
 
+    public String getValueType() {
+        return value + "-" + big;
+    }
+    
+    public boolean isSame(CardData card) {
+        return value == card.getValue() && big == card.isBig();
+    }
+    
     @Override
     public String toString() {
         return "CardData [id=" + id + ", value=" + value + ", big=" + big + "]";
