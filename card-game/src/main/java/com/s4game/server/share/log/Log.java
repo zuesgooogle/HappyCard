@@ -27,6 +27,8 @@ public class Log {
     
     public static Logger CARD = LoggerFactory.getLogger("card");
     
+    
+    
     public static void error(String message, Object... params) {
         LOG.error(message, params);
     }
