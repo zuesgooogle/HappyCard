@@ -1,14 +1,18 @@
 package com.s4game.hupai;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.s4game.server.public_.room.RoomConstants;
+import com.s4game.core.tuple.Tuple;
+import com.s4game.core.tuple.TwoTuple;
 import com.s4game.server.public_.room.model.CardData;
 import com.s4game.server.utils.id.IdUtil;
 
@@ -43,24 +47,41 @@ public class Hupai3n1 {
     @Test
     public void hupai() {
         CopyOnWriteArrayList<CardData> cards = new CopyOnWriteArrayList<>();
-        
 
-        int[] add = new int[] {1, 2, 3, 4, 1};
+        int[] add = new int[] {1, 2, 3, 4, 2, 7, 10, 1};
         for (int v : add) {
             String id = nextCardId(stageId);
             cards.add(new CardData(id, v));
         }
 
-        CopyOnWriteArrayList<CardData> remainCards = new CopyOnWriteArrayList<>();
-        // N +- 3, 最多取 5 次
-        for(int i = 0; i < 15; i++) {
-            match123(cards, remainCards);
+        List<TwoTuple<CardData, CardData>> pairs = findPairs(cards);
+        if (pairs.isEmpty()) {
+            LOG.info("not match pair.");
+            return;
         }
         
-        if (remainCards.isEmpty()) {
-            LOG.info("hu pai.");
-        } else {
-            this.match2710(remainCards);
+        boolean hupai = false;
+        for (TwoTuple<CardData, CardData> tuple : pairs) {
+            @SuppressWarnings("unchecked")
+            CopyOnWriteArrayList<CardData> tmp = (CopyOnWriteArrayList<CardData>) cards.clone();
+            CopyOnWriteArrayList<CardData> remainCards = new CopyOnWriteArrayList<>();
+            
+            tmp.remove(tuple.getFirst());
+            tmp.remove(tuple.getSecond());
+            //LOG.info("match pair success. card: {}{}", tuple.getFirst(), tuple.getSecond());
+            
+            for(int i = 0; i < 10; i++) {
+                match123(tmp, remainCards);
+            }
+            match2710(remainCards);
+            
+            if (remainCards.isEmpty()) {
+                hupai = true;
+            }
+        }
+
+        if (hupai) {
+            //LOG.info("hupai.");
         }
     }
 
@@ -104,7 +125,7 @@ public class Hupai3n1 {
         if (serial >= 2) {
             tmp.add(0, card);
 
-            LOG.info("match success. cards: {}", tmp);
+            //LOG.info("match success. cards: {}", tmp);
 
             // 移除
             for (CardData d : tmp) {
@@ -114,6 +135,8 @@ public class Hupai3n1 {
             cards.remove(card);
             
             remainCards.add(card);
+            
+            //LOG.info("match failed. card: {}", card);
         }
     }
 
@@ -132,10 +155,10 @@ public class Hupai3n1 {
         }
         
         if (tmp.size() < values.length) {
-            LOG.info("match failure. cards: {}", tmp);
+            //LOG.info("match failure. cards: {}", tmp);
             return;
         } else {
-            LOG.info("match success. cards: {}", tmp);
+            //LOG.info("match success. cards: {}", tmp);
             
             //删除
             for (CardData c : tmp) {
@@ -147,19 +170,57 @@ public class Hupai3n1 {
     }
     
     /**
+     * 匹配一对，进行移除
+     * 
+     * @param cards
+     * @param remainCards
+     */
+    public void matchPair(CopyOnWriteArrayList<CardData> cards) {
+        TwoTuple<CardData, CardData> pairCard = null;
+        
+        Map<String, CardData> map = new HashMap<>();
+        for (CardData d : cards) {
+            if (map.containsKey(d.getKey())) {
+                pairCard = Tuple.tuple(map.get(d.getKey()), d);
+                break;
+            }
+            
+            map.put(d.getKey(), d);
+        }
+        
+        if (pairCard != null) {
+            cards.remove(pairCard.getFirst());
+            cards.remove(pairCard.getSecond());
+            
+            //LOG.info("match pair success. card: {}{}", pairCard.getFirst(), pairCard.getSecond());
+        }
+    }
+    
+    /**
      * 查找 一对 的数量
      * 
      * @param cards
      * @return
      */
-    public int findPair(CopyOnWriteArrayList<CardData> cards) {
-        int count = 0;
+    public List<TwoTuple<CardData, CardData>> findPairs(List<CardData> cards) {
+        List<TwoTuple<CardData, CardData>> paris = new ArrayList<>();
         
+        Map<String, CardData> map = new HashMap<>();
         
-        return count;
+        TwoTuple<CardData, CardData> tuple = null;
+        for (CardData d : cards) {
+            if (map.containsKey(d.getKey())) {
+                tuple = Tuple.tuple(map.get(d.getKey()), d);
+                paris.add(tuple);
+            }
+            
+            map.put(d.getKey(), d);
+        }
+        
+        return paris;
     }
     
-    public CardData findValue(CopyOnWriteArrayList<CardData> cards, int value) {
+    public CardData findValue(List<CardData> cards, int value) {
         for (CardData d : cards) {
             if (d.getValue() == value) {
                 return d;

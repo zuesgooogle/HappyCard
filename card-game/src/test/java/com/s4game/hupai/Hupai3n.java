@@ -55,8 +55,7 @@ public class Hupai3n {
         }
 
         CopyOnWriteArrayList<CardData> remainCards = new CopyOnWriteArrayList<>();
-        // N +- 3, 最多取 5 次
-        for(int i = 0; i < 15; i++) {
+        for(int i = 0; i < 10; i++) {
             match123(cards, remainCards);
         }
         

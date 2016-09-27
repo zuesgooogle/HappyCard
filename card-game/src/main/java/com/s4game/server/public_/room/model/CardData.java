@@ -47,7 +47,7 @@ public class CardData {
         this.big = big;
     }
 
-    public String getValueType() {
+    public String getKey() {
         return value + "-" + big;
     }
     
