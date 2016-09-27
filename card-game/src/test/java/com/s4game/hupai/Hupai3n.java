@@ -8,7 +8,6 @@ import org.junit.Test;
 import com.s4game.server.public_.room.RoomConstants;
 import com.s4game.server.public_.room.model.CardData;
 import com.s4game.server.utils.MathUtils;
-import com.s4game.server.utils.id.IdUtil;
 
 /**
  * @Author zeusgooogle@gmail.com
@@ -16,8 +15,6 @@ import com.s4game.server.utils.id.IdUtil;
  *
  */
 public class Hupai3n extends BaseHupai {
-
-    public static final String stageId = "0";
 
     @Test
     public void performance() {
@@ -43,7 +40,7 @@ public class Hupai3n extends BaseHupai {
             int index = MathUtils.random(0, RoomConstants.CARD_VALUE.length - 1);
             int value = RoomConstants.CARD_VALUE[index];
             
-            String id = nextCardId(stageId);
+            String id = nextCardId();
             cards.add(new CardData(id, value));
         }
 
@@ -59,8 +56,6 @@ public class Hupai3n extends BaseHupai {
         }
     }
 
-    private String nextCardId(String stageId) {
-        return IdUtil.nextString(stageId);
-    }
+
 
 }

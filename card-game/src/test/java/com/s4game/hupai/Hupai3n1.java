@@ -57,7 +57,7 @@ public class Hupai3n1 extends BaseHupai {
             
             tmp.remove(tuple.getFirst());
             tmp.remove(tuple.getSecond());
-            LOG.info("match pair success. card: {}{}", tuple.getFirst(), tuple.getSecond());
+            LOG.info("match pair success. card: {}, {}", tuple.getFirst(), tuple.getSecond());
             
             match123(tmp, remainCards);
             

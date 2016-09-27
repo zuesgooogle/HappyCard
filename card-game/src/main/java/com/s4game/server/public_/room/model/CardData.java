@@ -1,27 +1,28 @@
 package com.s4game.server.public_.room.model;
 
+import com.s4game.server.public_.card.model.CardType;
+
 public class CardData {
 
     private String id;
 
     private int value;
 
-    private boolean big;
+    private int type;
 
     public CardData() {
 
     }
 
     public CardData(String id, int value) {
-        this(id, value, false);
+        this(id, value, CardType.SMALL);
     }
-    
-    public CardData(String id, int value, boolean big) {
+
+    public CardData(String id, int value, int type) {
         this.id = id;
         this.value = value;
-        this.big = big;
+        this.type = type;
     }
-    
 
     public String getId() {
         return id;
@@ -39,25 +40,25 @@ public class CardData {
         this.value = value;
     }
 
-    public boolean isBig() {
-        return big;
+    public int getType() {
+        return type;
     }
 
-    public void setBig(boolean big) {
-        this.big = big;
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getKey() {
-        return value + "-" + big;
+        return value + "-" + type;
     }
-    
+
     public boolean isSame(CardData card) {
-        return value == card.getValue() && big == card.isBig();
+        return value == card.getValue() && type == card.getType();
     }
-    
+
     @Override
     public String toString() {
-        return "CardData [id=" + id + ", value=" + value + ", big=" + big + "]";
+        return "CardData [value=" + value + ", type=" + type + "]";
     }
 
 }

@@ -102,10 +102,10 @@ public class CardServiceImpl implements ICardService {
         }
 
         for (int v : RoomConstants.CARD_VALUE) {
-            cards.add(new CardData(nextCardId(stageId), v, true));
-            cards.add(new CardData(nextCardId(stageId), v, true));
-            cards.add(new CardData(nextCardId(stageId), v, true));
-            cards.add(new CardData(nextCardId(stageId), v, true));
+            cards.add(new CardData(nextCardId(stageId), v, 1));
+            cards.add(new CardData(nextCardId(stageId), v, 1));
+            cards.add(new CardData(nextCardId(stageId), v, 1));
+            cards.add(new CardData(nextCardId(stageId), v, 1));
         }
 
         Collections.shuffle(cards);
