@@ -1,6 +1,7 @@
 package com.s4game.hupai;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.s4game.core.tuple.Tuple;
 import com.s4game.core.tuple.TwoTuple;
 import com.s4game.server.public_.card.model.CardType;
+import com.s4game.server.public_.room.RoomConstants;
 import com.s4game.server.public_.room.model.CardData;
 import com.s4game.server.utils.id.IdUtil;
 
@@ -20,6 +22,28 @@ public abstract class BaseHupai {
     
     public static final String stageId = "0";
     
+    public ArrayList<CardData> initCards(String stageId) {
+        ArrayList<CardData> cards = new ArrayList<>();
+
+        for (int v : RoomConstants.CARD_VALUE) {
+            cards.add(new CardData(nextCardId(), v, CardType.SMALL));
+            cards.add(new CardData(nextCardId(), v, CardType.SMALL));
+            cards.add(new CardData(nextCardId(), v, CardType.SMALL));
+            cards.add(new CardData(nextCardId(), v, CardType.SMALL));
+        }
+
+        for (int v : RoomConstants.CARD_VALUE) {
+            cards.add(new CardData(nextCardId(), v, CardType.BIG));
+            cards.add(new CardData(nextCardId(), v, CardType.BIG));
+            cards.add(new CardData(nextCardId(), v, CardType.BIG));
+            cards.add(new CardData(nextCardId(), v, CardType.BIG));
+        }
+
+        Collections.shuffle(cards);
+
+        return cards;
+    }
+    
     /**
      * 取任意一张牌，匹配顺子
      * 
@@ -27,23 +51,17 @@ public abstract class BaseHupai {
      * 
      * @param cardMap
      */
-    public void match123(List<CardData> cards, List<CardData> remainCards) {
-        if (cards.isEmpty()) {
-            return;
-        }
-        
-        CardData card = cards.get(0);
-
+    public boolean match123(List<CardData> cards, CardData curData) {
         List<CardData> tmp = new ArrayList<>();
 
         int serial = 0; // 连续两次
-        int value = card.getValue();
+        int value = curData.getValue();
         for (int i = value - 2; i <= value + 2; i++) {
             if (i == value) {
                 continue;
             }
 
-            CardData matchCard = findValue(cards, i, card.getType());
+            CardData matchCard = findValue(cards, i, curData.getType());
             if (matchCard != null) {
                 serial++;
                 tmp.add(matchCard);
@@ -58,20 +76,15 @@ public abstract class BaseHupai {
         }
 
         if (serial >= 2) {
-            tmp.add(0, card);
+            tmp.add(0, curData);
 
-            LOG.info("match success. cards: {}", tmp);
-            // 移除
             for (CardData d : tmp) {
                 cards.remove(d);
             }
-        } else {
-            cards.remove(card);
-            remainCards.add(card);
-            LOG.info("match 123 failed. card: {}", card);
+            return true;
         }
         
-        match123(cards, remainCards);
+        return false;
     }
 
     /**
@@ -79,33 +92,53 @@ public abstract class BaseHupai {
      * 
      * @param cards
      */
-    public void match2710(List<CardData> cards) {
-        if (cards.isEmpty()) {
-            return;
-        }
-        
+    public boolean match2710(List<CardData> cards, CardData curCard) {
         int[] values = new int[]{2, 7 ,10};
         List<CardData> tmp = new ArrayList<>();
+        tmp.add(curCard);
+        
         for (int v : values) {
-            CardData card = findValue(cards, v, CardType.SMALL);
+            CardData card = findValue(cards, v, curCard.getType());
             if (card != null) {
                 tmp.add(card);
             }
         }
         
         if (tmp.size() < values.length) {
-            LOG.info("match 2710 failed. cards: {}", tmp);
-            return;
+            //LOG.info("match 2710 failed. cards: {}", tmp);
+            return false;
         } else {
-            LOG.info("match success. cards: {}", tmp);
+            //LOG.info("match success. cards: {}", tmp);
             
-            //删除
             for (CardData c : tmp) {
                 cards.remove(c);
             }
             
-            match2710(cards);
+            return true;
         }
+    }
+    
+    public boolean match111(List<CardData> cards, CardData curCard) {
+        List<CardData> tmp = new ArrayList<>();
+        tmp.add(curCard);
+        
+        for (CardData d : cards) {
+            if (d.getValue() == curCard.getValue()) {
+                tmp.add(d);
+            }
+        }
+        
+        if (tmp.size() >= 3) {
+            //LOG.info("match 111 success. cards: {}", tmp);
+            
+            for (CardData c : tmp) {
+                cards.remove(c);
+            }
+            
+            return true;
+        }
+        
+        return false;
     }
     
     /**

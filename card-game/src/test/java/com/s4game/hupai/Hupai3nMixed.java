@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.s4game.server.public_.card.model.CardType;
 import com.s4game.server.public_.room.model.CardData;
+import com.s4game.server.utils.MathUtils;
 
 /**
  * 
@@ -16,38 +16,71 @@ import com.s4game.server.public_.room.model.CardData;
  */
 public class Hupai3nMixed extends BaseHupai {
 
+    private ArrayList<CardData> sourceCards;
+    
+    private int hupaiCount = 0;
+    
     @Test
-    public void hupai() {
-        ArrayList<CardData> cards = new ArrayList<>();
+    public void performance() {
+        int count = 1000000;
         
-        cards.add(new CardData(nextCardId(), 1));
-        cards.add(new CardData(nextCardId(), 1, CardType.BIG));
-        cards.add(new CardData(nextCardId(), 1, CardType.BIG));
-        
-        cards.add(new CardData(nextCardId(), 3));
-        cards.add(new CardData(nextCardId(), 4));
-        cards.add(new CardData(nextCardId(), 5));
-        
-        cards.add(new CardData(nextCardId(), 2, CardType.BIG));
-        cards.add(new CardData(nextCardId(), 3, CardType.BIG));
-        cards.add(new CardData(nextCardId(), 4, CardType.BIG));
-        
-        cards.add(new CardData(nextCardId(), 4, CardType.BIG));
-        cards.add(new CardData(nextCardId(), 5, CardType.BIG));
-        cards.add(new CardData(nextCardId(), 6, CardType.BIG));
-        
-        cards.add(new CardData(nextCardId(), 7, CardType.BIG));
-        cards.add(new CardData(nextCardId(), 8, CardType.BIG));
-        cards.add(new CardData(nextCardId(), 9, CardType.BIG));
-        
-        for (CardData d : cards) {
-            boolean match111 = canMatch111(cards, d);
-            boolean match123 = canMatch123(cards, d);
-            boolean match2710 = canMatch2710(cards, d);
-            
-            LOG.info("card: {}, 111: {}, 123: {}, 2710: {}", d, match111, match123, match2710);
+        long start = System.currentTimeMillis();
+        int i = 0;
+        while(i++ < count) {
+            hupai();
         }
         
+        long end = System.currentTimeMillis();
+        LOG.info(" i : {} use time: {}, hupai: {}", i, (end - start), hupaiCount);
     }
+    
+    @SuppressWarnings("unchecked")
+    @Test
+    public void hupai() {
+        sourceCards = new ArrayList<>();
+        ArrayList<CardData> tmp = initCards(stageId);
 
+        //随机获取 15张
+        for(int i = 0; i < 15; i++) {
+            int index = MathUtils.random(0, tmp.size() - 1);
+            sourceCards.add(tmp.get(index));
+        }
+        
+        match((ArrayList<CardData>) sourceCards.clone());
+    }
+    
+    public void match(ArrayList<CardData> cards) {
+        if (cards.isEmpty()) {
+            hupaiCount++;
+            //LOG.info("hupai. cards: {}", sourceCards);
+            return;
+        } else {
+            //LOG.info("failed. cards: {}", sourceCards);
+        }
+        
+        CardData curCard = cards.get(0);
+        boolean match111 = canMatch111(sourceCards, curCard);
+        boolean match123 = canMatch123(sourceCards, curCard);
+        boolean match2710 = canMatch2710(sourceCards, curCard);
+        
+        if (match111) {
+            if (match111(cards, curCard)) {
+                match(cards);
+            }
+        }
+        
+        if (match123) {
+            if (match123(cards, curCard)) {
+                match(cards);
+            }
+        }
+        
+        if (match2710) {
+            if (match2710(cards, curCard)) {
+                match(cards);
+            }
+        }
+        
+        return;
+    }
 }

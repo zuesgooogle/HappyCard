@@ -6,4 +6,8 @@ public class Tuple {
         return new TwoTuple<A, B>(first, second);
     }
 
+    public static <A, B, C> ThreeTuple<A, B, C> tuple(A first, B second, C third) {
+        return new ThreeTuple<A, B, C>(first, second, third);
+    }
+    
 }
