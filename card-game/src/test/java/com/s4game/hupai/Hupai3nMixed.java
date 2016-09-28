@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.s4game.server.public_.card.model.CardType;
 import com.s4game.server.public_.room.model.CardData;
 import com.s4game.server.utils.MathUtils;
 
@@ -39,43 +38,23 @@ public class Hupai3nMixed extends BaseHupai {
     @Test
     public void hupai() {
         sourceCards = new ArrayList<>();
-        ArrayList<CardData> tmp = initCards(stageId);
+        ArrayList<CardData> tmp = initCards();
 
         //随机获取 15张
         for(int i = 0; i < 15; i++) {
             int index = MathUtils.random(0, tmp.size() - 1);
-            sourceCards.add(tmp.get(index));
+            sourceCards.add(tmp.remove(index));
         }
         
-//        sourceCards.add(new CardData(nextCardId(), 8, CardType.BIG));
-//        sourceCards.add(new CardData(nextCardId(), 10, CardType.SMALL));
-//        sourceCards.add(new CardData(nextCardId(), 5, CardType.SMALL));
-//        sourceCards.add(new CardData(nextCardId(), 6, CardType.BIG));
-//        sourceCards.add(new CardData(nextCardId(), 6, CardType.BIG));
-//        
-//        sourceCards.add(new CardData(nextCardId(), 3, CardType.SMALL));
-//        sourceCards.add(new CardData(nextCardId(), 4, CardType.SMALL));
-//        sourceCards.add(new CardData(nextCardId(), 5, CardType.BIG));
-//        sourceCards.add(new CardData(nextCardId(), 6, CardType.BIG));
-//        
-//        sourceCards.add(new CardData(nextCardId(), 8, CardType.SMALL));
-//        sourceCards.add(new CardData(nextCardId(), 10, CardType.SMALL));
-//        sourceCards.add(new CardData(nextCardId(), 5, CardType.SMALL));
-//        sourceCards.add(new CardData(nextCardId(), 10, CardType.BIG));
-//
-//        sourceCards.add(new CardData(nextCardId(), 8, CardType.SMALL));
-//        sourceCards.add(new CardData(nextCardId(), 10, CardType.BIG));
-
         match((ArrayList<CardData>) sourceCards.clone());
     }
     
+    @SuppressWarnings("unchecked")
     public void match(ArrayList<CardData> cards) {
         if (cards.isEmpty()) {
             hupaiCount++;
-            LOG.info("hupai. cards: {}", sourceCards);
+            //LOG.info("hupai. cards: {}", sourceCards);
             return;
-        } else {
-            //LOG.info("failed. cards: {}", sourceCards);
         }
         
         CardData curCard = cards.get(0);
@@ -84,20 +63,23 @@ public class Hupai3nMixed extends BaseHupai {
         boolean match2710 = canMatch2710(sourceCards, curCard);
         
         if (match111) {
-            if (match111(cards, curCard)) {
-                match(cards);
+            ArrayList<CardData> copy = (ArrayList<CardData>) cards.clone();
+            if (match111(copy, curCard)) {
+                match(copy);
             }
         }
         
         if (match123) {
-            if (match123(cards, curCard)) {
-                match(cards);
+            ArrayList<CardData> copy = (ArrayList<CardData>) cards.clone();
+            if (match123(copy, curCard)) {
+                match(copy);
             }
         }
         
         if (match2710) {
-            if (match2710(cards, curCard)) {
-                match(cards);
+            ArrayList<CardData> copy = (ArrayList<CardData>) cards.clone();
+            if (match2710(copy, curCard)) {
+                match(copy);
             }
         }
         

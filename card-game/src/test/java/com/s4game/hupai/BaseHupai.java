@@ -22,7 +22,7 @@ public abstract class BaseHupai {
     
     public static final String stageId = "0";
     
-    public ArrayList<CardData> initCards(String stageId) {
+    public ArrayList<CardData> initCards() {
         ArrayList<CardData> cards = new ArrayList<>();
 
         for (int v : RoomConstants.CARD_VALUE) {
@@ -78,6 +78,8 @@ public abstract class BaseHupai {
         if (serial >= 2) {
             tmp.add(0, curData);
 
+            //LOG.info("match 123 success. cards: {}", tmp);
+            
             for (CardData d : tmp) {
                 cards.remove(d);
             }
@@ -108,7 +110,7 @@ public abstract class BaseHupai {
             //LOG.info("match 2710 failed. cards: {}", tmp);
             return false;
         } else {
-            //LOG.info("match success. cards: {}", tmp);
+            //LOG.info("match 2710 success. cards: {}", tmp);
             
             for (CardData c : tmp) {
                 cards.remove(c);
@@ -120,7 +122,7 @@ public abstract class BaseHupai {
     
     public boolean match111(List<CardData> cards, CardData curCard) {
         List<CardData> tmp = new ArrayList<>();
-        tmp.add(curCard);
+        //tmp.add(curCard);
         
         int count = 0;
         for (CardData d : cards) {
@@ -145,6 +147,13 @@ public abstract class BaseHupai {
         }
         
         return false;
+    }
+    
+    public boolean matchPair(List<CardData> cards, TwoTuple<CardData, CardData> pair) {
+        cards.remove(pair.getFirst());
+        cards.remove(pair.getSecond());
+        
+        return true;
     }
     
     /**
@@ -217,6 +226,25 @@ public abstract class BaseHupai {
         }
         
         return tmp.size() == values.length;
+    }
+    
+    /**
+     * 匹配对子
+     * 
+     * @param cards
+     * @param source
+     * @return
+     */
+    public boolean canMatchPair(List<CardData> cards, CardData source) {
+        int count = 0;
+        
+        for (CardData d : cards) {
+            if (source.isSame(d)) {
+                count++;
+            }
+        }
+        
+        return count >= 2;
     }
     
     public CardData findValue(List<CardData> cards, int value) {
