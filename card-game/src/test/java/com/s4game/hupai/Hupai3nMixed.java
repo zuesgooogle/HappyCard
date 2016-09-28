@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import com.s4game.server.public_.card.model.CardType;
 import com.s4game.server.public_.room.model.CardData;
 import com.s4game.server.utils.MathUtils;
 
@@ -46,13 +47,32 @@ public class Hupai3nMixed extends BaseHupai {
             sourceCards.add(tmp.get(index));
         }
         
+//        sourceCards.add(new CardData(nextCardId(), 8, CardType.BIG));
+//        sourceCards.add(new CardData(nextCardId(), 10, CardType.SMALL));
+//        sourceCards.add(new CardData(nextCardId(), 5, CardType.SMALL));
+//        sourceCards.add(new CardData(nextCardId(), 6, CardType.BIG));
+//        sourceCards.add(new CardData(nextCardId(), 6, CardType.BIG));
+//        
+//        sourceCards.add(new CardData(nextCardId(), 3, CardType.SMALL));
+//        sourceCards.add(new CardData(nextCardId(), 4, CardType.SMALL));
+//        sourceCards.add(new CardData(nextCardId(), 5, CardType.BIG));
+//        sourceCards.add(new CardData(nextCardId(), 6, CardType.BIG));
+//        
+//        sourceCards.add(new CardData(nextCardId(), 8, CardType.SMALL));
+//        sourceCards.add(new CardData(nextCardId(), 10, CardType.SMALL));
+//        sourceCards.add(new CardData(nextCardId(), 5, CardType.SMALL));
+//        sourceCards.add(new CardData(nextCardId(), 10, CardType.BIG));
+//
+//        sourceCards.add(new CardData(nextCardId(), 8, CardType.SMALL));
+//        sourceCards.add(new CardData(nextCardId(), 10, CardType.BIG));
+
         match((ArrayList<CardData>) sourceCards.clone());
     }
     
     public void match(ArrayList<CardData> cards) {
         if (cards.isEmpty()) {
             hupaiCount++;
-            //LOG.info("hupai. cards: {}", sourceCards);
+            LOG.info("hupai. cards: {}", sourceCards);
             return;
         } else {
             //LOG.info("failed. cards: {}", sourceCards);

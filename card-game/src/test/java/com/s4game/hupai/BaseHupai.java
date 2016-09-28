@@ -122,9 +122,15 @@ public abstract class BaseHupai {
         List<CardData> tmp = new ArrayList<>();
         tmp.add(curCard);
         
+        int count = 0;
         for (CardData d : cards) {
+            if (count >= 3) {
+                break;
+            }
+            
             if (d.getValue() == curCard.getValue()) {
                 tmp.add(d);
+                count++;
             }
         }
         
@@ -179,6 +185,9 @@ public abstract class BaseHupai {
                     matched = true;
                     break;
                 }
+            } else {
+                serial = 0;
+                tmp.clear();
             }
         }
         
