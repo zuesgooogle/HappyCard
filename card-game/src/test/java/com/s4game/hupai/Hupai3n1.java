@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.s4game.core.tuple.TwoTuple;
 import com.s4game.server.public_.room.model.CardData;
+import com.s4game.server.utils.MathUtils;
 
 /**
  * 
@@ -31,18 +32,19 @@ public class Hupai3n1 extends BaseHupai {
         }
 
         long end = System.currentTimeMillis();
-        LOG.info(" i : {} use time: {}", i, (end - start));
+        LOG.info(" i : {} use time: {}, hupai: {}", i, (end - start), hupaiCount);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void hupai() {
         sourceCards = new ArrayList<>();
+        ArrayList<CardData> initCards = initCards();
 
-        int[] add = new int[] { 1, 2, 3, 4, 4, 5, 6, 2, 7, 10, 1 };
-        for (int v : add) {
-            String id = nextCardId();
-            sourceCards.add(new CardData(id, v));
+        //随机获取 15张
+        for(int i = 0; i < 14; i++) {
+            int index = MathUtils.random(0, initCards.size() - 1);
+            sourceCards.add(initCards.remove(index));
         }
 
         List<TwoTuple<CardData, CardData>> pairs = findPairs(sourceCards);
@@ -59,25 +61,6 @@ public class Hupai3n1 extends BaseHupai {
             match(tmp);
         }
 
-        // boolean hupai = false;
-        // for (TwoTuple<CardData, CardData> tuple : pairs) {
-        // ArrayList<CardData> tmp = (ArrayList<CardData>) sourceCards.clone();
-        // List<CardData> remainCards = new ArrayList<>();
-        //
-        // tmp.remove(tuple.getFirst());
-        // tmp.remove(tuple.getSecond());
-        // LOG.info("match pair success. card: {}, {}", tuple.getFirst(),
-        // tuple.getSecond());
-        //
-        // match123(tmp, remainCards);
-        //
-        // match2710(remainCards);
-        //
-        // if (remainCards.isEmpty()) {
-        // hupai = true;
-        // }
-        // }
-
         match((ArrayList<CardData>) sourceCards.clone());
     }
 
@@ -86,8 +69,6 @@ public class Hupai3n1 extends BaseHupai {
             hupaiCount++;
             LOG.info("hupai. cards: {}", sourceCards);
             return;
-        } else {
-            // LOG.info("failed. cards: {}", sourceCards);
         }
 
         CardData curCard = cards.get(0);

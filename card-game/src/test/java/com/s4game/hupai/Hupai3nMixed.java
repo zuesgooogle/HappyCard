@@ -53,7 +53,7 @@ public class Hupai3nMixed extends BaseHupai {
     public void match(ArrayList<CardData> cards) {
         if (cards.isEmpty()) {
             hupaiCount++;
-            //LOG.info("hupai. cards: {}", sourceCards);
+            LOG.info("hupai. cards: {}", sourceCards);
             return;
         }
         
