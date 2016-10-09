@@ -8,7 +8,7 @@ public class CardData {
 
     private int value;
 
-    private int type;
+    private CardType type;
 
     public CardData() {
 
@@ -18,7 +18,7 @@ public class CardData {
         this(id, value, CardType.SMALL);
     }
 
-    public CardData(String id, int value, int type) {
+    public CardData(String id, int value, CardType type) {
         this.id = id;
         this.value = value;
         this.type = type;
@@ -40,11 +40,11 @@ public class CardData {
         this.value = value;
     }
 
-    public int getType() {
+    public CardType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(CardType type) {
         this.type = type;
     }
 

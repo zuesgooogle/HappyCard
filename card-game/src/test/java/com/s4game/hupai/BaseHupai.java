@@ -256,7 +256,7 @@ public abstract class BaseHupai {
         return null;
     }
     
-    public CardData findValue(List<CardData> cards, int value, int type) {
+    public CardData findValue(List<CardData> cards, int value, CardType type) {
         for (CardData d : cards) {
             if (d.getValue() == value && d.getType() == type) {
                 return d;

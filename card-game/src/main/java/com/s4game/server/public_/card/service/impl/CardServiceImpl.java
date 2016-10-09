@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.s4game.core.container.DataContainer;
 import com.s4game.server.bus.share.constants.BusShareConstant;
 import com.s4game.server.bus.stagecontroll.RoleState;
+import com.s4game.server.public_.card.model.CardType;
 import com.s4game.server.public_.card.service.ICardService;
 import com.s4game.server.public_.room.RoomConstants;
 import com.s4game.server.public_.room.model.CardData;
@@ -102,10 +103,10 @@ public class CardServiceImpl implements ICardService {
         }
 
         for (int v : RoomConstants.CARD_VALUE) {
-            cards.add(new CardData(nextCardId(stageId), v, 1));
-            cards.add(new CardData(nextCardId(stageId), v, 1));
-            cards.add(new CardData(nextCardId(stageId), v, 1));
-            cards.add(new CardData(nextCardId(stageId), v, 1));
+            cards.add(new CardData(nextCardId(stageId), v, CardType.BIG));
+            cards.add(new CardData(nextCardId(stageId), v, CardType.BIG));
+            cards.add(new CardData(nextCardId(stageId), v, CardType.BIG));
+            cards.add(new CardData(nextCardId(stageId), v, CardType.BIG));
         }
 
         Collections.shuffle(cards);
