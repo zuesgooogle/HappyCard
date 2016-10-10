@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.s4game.server.bus.role.export.RoleWrapper;
+import com.s4game.server.public_.card.model.card.Card;
 
 public class RoomMemberData {
 
@@ -26,17 +27,17 @@ public class RoomMemberData {
     /**
      * 玩家进的牌
      */
-    private List<CardData> inCards = new ArrayList<>();
+    private List<Card> inCards = new ArrayList<>();
 
     /**
      * 玩家打出的牌
      */
-    private List<CardData> outCards = new ArrayList<>();
+    private List<Card> outCards = new ArrayList<>();
 
     /**
      * 玩家手牌
      */
-    private List<CardData> handCard = new ArrayList<>();
+    private List<Card> handCard = new ArrayList<>();
 
     public RoomMemberData(RoleWrapper role) {
         this.roleId = role.getId();
@@ -72,27 +73,27 @@ public class RoomMemberData {
         this.dealer = dealer;
     }
 
-    public List<CardData> getInCards() {
+    public List<Card> getInCards() {
         return inCards;
     }
 
-    public void setInCards(List<CardData> inCards) {
+    public void setInCards(List<Card> inCards) {
         this.inCards = inCards;
     }
 
-    public List<CardData> getOutCards() {
+    public List<Card> getOutCards() {
         return outCards;
     }
 
-    public void setOutCards(List<CardData> outCards) {
+    public void setOutCards(List<Card> outCards) {
         this.outCards = outCards;
     }
 
-    public List<CardData> getHandCard() {
+    public List<Card> getHandCard() {
         return handCard;
     }
 
-    public void setHandCard(List<CardData> handCard) {
+    public void setHandCard(List<Card> handCard) {
         this.handCard = handCard;
     }
 

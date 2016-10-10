@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.s4game.core.tuple.Tuple;
 import com.s4game.core.tuple.TwoTuple;
-import com.s4game.server.public_.card.model.CardType;
+import com.s4game.server.public_.card.model.card.CardType;
 import com.s4game.server.public_.room.RoomConstants;
 import com.s4game.server.public_.room.model.CardData;
 import com.s4game.server.utils.id.IdUtil;

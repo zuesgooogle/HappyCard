@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
 import com.s4game.core.container.DataContainer;
 import com.s4game.server.bus.share.constants.BusShareConstant;
 import com.s4game.server.bus.stagecontroll.RoleState;
-import com.s4game.server.public_.card.model.CardType;
+import com.s4game.server.public_.card.model.card.Card;
+import com.s4game.server.public_.card.model.card.CardState;
+import com.s4game.server.public_.card.model.card.CardType;
 import com.s4game.server.public_.card.service.ICardService;
 import com.s4game.server.public_.room.RoomConstants;
-import com.s4game.server.public_.room.model.CardData;
 import com.s4game.server.public_.room.model.RoomBusinessData;
 import com.s4game.server.public_.room.model.RoomMemberData;
 import com.s4game.server.share.log.Log;
 import com.s4game.server.stage.room.RoomStage;
-import com.s4game.server.stage.service.IRoleStageService;
 import com.s4game.server.stage.service.IStageService;
 import com.s4game.server.utils.MathUtils;
 import com.s4game.server.utils.id.IdUtil;
@@ -28,9 +28,6 @@ import com.s4game.server.utils.id.IdUtil;
 public class CardServiceImpl implements ICardService {
 
     public static final Logger LOG = Log.CARD;
-
-    @Autowired
-    private IRoleStageService roleStageService;
 
     @Autowired
     private IStageService stageService;
@@ -42,7 +39,7 @@ public class CardServiceImpl implements ICardService {
     public void deal(RoomStage stage) {
         RoomBusinessData businessData = stage.getRoomBusinessData();
 
-        List<CardData> initCards = initCards(stage.getId());
+        List<Card> initCards = initCards(stage.getId());
 
         // 初始化牌
         businessData.setInitCards(initCards);
@@ -56,7 +53,7 @@ public class CardServiceImpl implements ICardService {
         while (count < RoomConstants.INIT_CARD_SIZE) {
             RoomMemberData member = businessData.getMembers().get(index);
 
-            CardData card = initCards.remove(0);
+            Card card = initCards.remove(0);
             member.getHandCard().add(card);
 
             count++;
@@ -67,13 +64,14 @@ public class CardServiceImpl implements ICardService {
             }
         }
 
-        CardData lastCard = initCards.remove(0);
+        Card lastCard = initCards.remove(0);
         dealer.getHandCard().add(lastCard);
 
     }
 
     /**
-     * 1. 开始游戏，随机一个 2. 一局打完，胡牌人庄 ，没人胡牌，随机一个
+     * 1. 开始游戏，随机一个
+     * 2. 一局打完，胡牌人庄 ，没人胡牌，随机一个
      * 
      * @param businessData
      */
@@ -92,21 +90,22 @@ public class CardServiceImpl implements ICardService {
      * 
      * @return
      */
-    private List<CardData> initCards(String stageId) {
-        List<CardData> cards = new ArrayList<>();
+    @Override
+    public List<Card> initCards(String stageId) {
+        List<Card> cards = new ArrayList<>();
 
         for (int v : RoomConstants.CARD_VALUE) {
-            cards.add(new CardData(nextCardId(stageId), v));
-            cards.add(new CardData(nextCardId(stageId), v));
-            cards.add(new CardData(nextCardId(stageId), v));
-            cards.add(new CardData(nextCardId(stageId), v));
+            cards.add(new Card(nextCardId(stageId), v, CardType.SMALL, CardState.BOTTOM_CARD));
+            cards.add(new Card(nextCardId(stageId), v, CardType.SMALL, CardState.BOTTOM_CARD));
+            cards.add(new Card(nextCardId(stageId), v, CardType.SMALL, CardState.BOTTOM_CARD));
+            cards.add(new Card(nextCardId(stageId), v, CardType.SMALL, CardState.BOTTOM_CARD));
         }
 
         for (int v : RoomConstants.CARD_VALUE) {
-            cards.add(new CardData(nextCardId(stageId), v, CardType.BIG));
-            cards.add(new CardData(nextCardId(stageId), v, CardType.BIG));
-            cards.add(new CardData(nextCardId(stageId), v, CardType.BIG));
-            cards.add(new CardData(nextCardId(stageId), v, CardType.BIG));
+            cards.add(new Card(nextCardId(stageId), v, CardType.BIG, CardState.BOTTOM_CARD));
+            cards.add(new Card(nextCardId(stageId), v, CardType.BIG, CardState.BOTTOM_CARD));
+            cards.add(new Card(nextCardId(stageId), v, CardType.BIG, CardState.BOTTOM_CARD));
+            cards.add(new Card(nextCardId(stageId), v, CardType.BIG, CardState.BOTTOM_CARD));
         }
 
         Collections.shuffle(cards);

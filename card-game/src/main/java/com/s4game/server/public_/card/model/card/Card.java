@@ -1,8 +1,14 @@
-package com.s4game.server.public_.room.model;
+package com.s4game.server.public_.card.model.card;
 
 import com.s4game.server.public_.card.model.card.CardType;
 
-public class CardData {
+/**
+ * 一张牌
+ * 
+ * @author zeusgooogle@gmail.com
+ * @sine 2016年10月10日 下午5:19:43
+ */
+public class Card {
 
     private String id;
 
@@ -10,18 +16,17 @@ public class CardData {
 
     private CardType type;
 
-    public CardData() {
+    private CardState state;
+
+    public Card() {
 
     }
 
-    public CardData(String id, int value) {
-        this(id, value, CardType.SMALL);
-    }
-
-    public CardData(String id, int value, CardType type) {
+    public Card(String id, int value, CardType type, CardState state) {
         this.id = id;
         this.value = value;
         this.type = type;
+        this.state = state;
     }
 
     public String getId() {
@@ -48,17 +53,25 @@ public class CardData {
         this.type = type;
     }
 
-    public String getKey() {
+    public CardState getState() {
+        return state;
+    }
+
+    public void setState(CardState state) {
+        this.state = state;
+    }
+
+    public String getIdentity() {
         return value + "-" + type;
     }
 
-    public boolean isSame(CardData card) {
+    public boolean isSame(Card card) {
         return value == card.getValue() && type == card.getType();
     }
 
     @Override
     public String toString() {
-        return "CardData [value=" + value + ", type=" + type + "]";
+        return "Card [id=" + id + ", value=" + value + ", type=" + type + ", state=" + state + "]";
     }
 
 }

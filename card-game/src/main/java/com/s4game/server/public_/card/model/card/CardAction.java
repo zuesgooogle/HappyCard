@@ -1,4 +1,4 @@
-package com.s4game.server.public_.card.model;
+package com.s4game.server.public_.card.model.card;
 
 import com.s4game.core.enum_.EnumUtils;
 import com.s4game.core.enum_.IntEnum;
@@ -19,22 +19,27 @@ public enum CardAction implements IntEnum {
 	/**
 	 * 吃
 	 */
-	CHI_PAI(2),
+	CHI(2),
 	
 	/**
 	 * 碰
 	 */
-	PENG_PAID(4),
+	PENG(4),
+	
+	/**
+	 * 跑
+	 */
+	PAO(8),
 	
 	/**
 	 * 提龙
 	 */
-	TI_LONG(8),
+	LONG(16),
 	
 	/**
 	 * 胡牌
 	 */
-	HU_PAI(16),
+	HU(32),
 	
 	;
 	

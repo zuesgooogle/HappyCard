@@ -24,6 +24,21 @@ public final class MathUtils {
         double c = low + (hi - low + 1) * Math.random();
         return c > hi ? hi : (int) c;
     }
+    
+    /**
+     * 在[low, hi]之间随机一个数
+     * 
+     * @param low
+     * @param hi
+     * @return
+     */
+    public static long random(long low, long hi) {
+        if (low == hi) {
+            return low;
+        }
+        long c = (long) (low + (hi - low + 1) * Math.random());
+        return c > hi ? hi : c;
+    }
 
     /**
      * 在[low, hi)之间随机一个数

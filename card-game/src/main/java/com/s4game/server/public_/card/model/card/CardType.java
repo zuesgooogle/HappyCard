@@ -1,4 +1,4 @@
-package com.s4game.server.public_.card.model;
+package com.s4game.server.public_.card.model.card;
 
 import com.s4game.core.enum_.EnumUtils;
 import com.s4game.core.enum_.IntEnum;

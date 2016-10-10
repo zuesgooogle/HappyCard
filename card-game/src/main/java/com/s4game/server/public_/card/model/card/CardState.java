@@ -1,4 +1,4 @@
-package com.s4game.server.public_.card.model;
+package com.s4game.server.public_.card.model.card;
 
 import com.s4game.core.enum_.EnumUtils;
 import com.s4game.core.enum_.IntEnum;
@@ -12,25 +12,34 @@ import com.s4game.core.enum_.IntEnum;
 public enum CardState implements IntEnum {
 
     /**
+     * 房间底牌，还未分配
+     */
+    BOTTOM_CARD(1),
+    
+    /**
      * 手中
      */
-    HAND_CARD(1),
+    HAND_CARD(2),
 
     /**
      * 打出的，吃，碰，别人可以看到的
      */
-    OPEN_CARD(2),
+    OPEN_CARD(3),
 
     /**
      * 坎，别人看不见得
      */
-    CLOSE_CARD(3),
+    CLOSE_CARD(4),
 
     /**
      * 弃牌
      */
-    DISCARD(4),
+    DISCARD(5),
     
+    /**
+     * 放碰，有被跑的可能
+     */
+    RUN_CARD(6),
     
     ;
 

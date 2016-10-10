@@ -3,6 +3,8 @@ package com.s4game.server.public_.room.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.s4game.server.public_.card.model.card.Card;
+
 public class RoomBusinessData {
 
     private long roomId;
@@ -46,12 +48,12 @@ public class RoomBusinessData {
     /**
      * 初始化一副牌数据
      */
-    private List<CardData> initCards = new ArrayList<>();
+    private List<Card> initCards = new ArrayList<>();
     
     /**
      * 剩余牌列表
      */
-    private List<CardData> remainCards = new ArrayList<>();
+    private List<Card> remainCards = new ArrayList<>();
     
     public long getRoomId() {
         return roomId;
@@ -126,19 +128,19 @@ public class RoomBusinessData {
         return null;
     }
     
-    public List<CardData> getInitCards() {
+    public List<Card> getInitCards() {
         return initCards;
     }
 
-    public void setInitCards(List<CardData> initCards) {
+    public void setInitCards(List<Card> initCards) {
         this.initCards = initCards;
     }
 
-    public List<CardData> getRemainCards() {
+    public List<Card> getRemainCards() {
         return remainCards;
     }
 
-    public void setRemainCards(List<CardData> remainCards) {
+    public void setRemainCards(List<Card> remainCards) {
         this.remainCards = remainCards;
     }
     
